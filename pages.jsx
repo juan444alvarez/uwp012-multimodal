@@ -500,20 +500,16 @@ function ReferencesPage({ navigate }) {
       </h2>
       <ol className="list-none p-0 m-0 flex flex-col">
         {PORTFOLIO_EXAMPLES.map((p) => (
-          <li key={p.id} className={refLi}>
-            <span className="font-mono text-[11px] text-ink-faint tracking-[0.06em] pt-[3px]">
-              {p.id}
-            </span>
-            <span>
-              <em className="text-ink-strong italic not-italic-fallback" style={{ fontStyle: "italic" }}>
-                {p.name}
-              </em>
-              <span className="block mt-1.5 text-ink-muted text-[13px] font-mono tracking-[0.02em]">
-                Placeholder · designer name, portfolio URL, and access date pending.
-              </span>
-            </span>
-          </li>
-        ))}
+  <li key={p.id} className={refLi}>
+    <span className="font-mono ...">{p.id}</span>
+    <span>
+      <em style={{ fontStyle: "italic" }}>{p.name}</em>
+      <span className="block mt-1.5 text-ink-muted text-[13px] font-mono tracking-[0.02em]">
+  {p.note}
+</span>
+    </span>
+  </li>
+))}
       </ol>
     </div>
   );
@@ -529,14 +525,9 @@ function AIUsePage({ navigate }) {
       <h1 className="text-[clamp(34px,4.6vw,52px)] leading-[1.05] tracking-tightest font-medium text-ink-strong m-0 mb-4 animate-fade-up delay-1">
         AI use.
       </h1>
-      <p className="text-[17px] text-ink-muted m-0 mb-14 max-w-[56ch] leading-[1.55] animate-fade-up delay-2">
-        GenAI declaration for this composition. The rubric requires transparency; this page provides it in one place.
+      <p className="text-[16px] text-ink-muted m-0 mb-14 max-w-[56ch] leading-[1.55] animate-fade-up delay-2">
+        Claude Code (Anthropic) was used to generate the templated page layout that renders when a reader clicks into a card, and to generate the JavaScript that maps a scroll progress indicator to the homepage carousel.
       </p>
-
-      <div className="prose animate-fade-up delay-3">
-        <p><em className="callout">Declaration.</em></p>
-
-      </div>
     </div>
   );
 }

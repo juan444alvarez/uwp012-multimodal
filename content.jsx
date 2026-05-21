@@ -86,7 +86,7 @@ const CARDS = [
           caption: "Designer's portfolio overview showing project name, role, and metadata in a single hero section stacked above the process narrative. From: https://jasonspielman.com/notebooklm" },
         { label: "Portfolio Example A — overview block",
           image: "img/example-b.png",
-          caption: "Designer's portfolio overview showing project name, role, and metadata in a single hero section stacked above the process narrative. From: https://jasonspielman.com/notebooklm" },
+          caption: "Portfolio overview for MongoDB's AI Response project. Brand identity, hero image, and labeled metadata sit above the process write-up. From: https://www.elainewu.design/mongodb-v4" },
       ],
     },
   },
@@ -123,7 +123,7 @@ const CARDS = [
       "Readers come to the page to make a decision. The Nielsen Norman Group's eyetracking research found that \"79 percent of our test users always scanned any new page they came across; only 16 percent read word-by-word\"<sup>2</sup>. Scanning happens because the brain conserves attention by default. When it lands on an unfamiliar page, it sweeps the surface first, focusing only on elements that catch the eye. This is the standard mode for reading anything on a screen.",
     ],
     examples: [
-    { label: "Hero shot", image: "img/example-c.png", width: "50%", caption: "Figure 1. Eyetracking heatmap of a typical web page, 2014, digital image, Nielsen Norman Group, www.nngroup.com/reports/how-people-read-web-eyetracking-evidence/." },
+    { label: "Hero shot", image: "img/example-c.png", width: "50%", caption: "Eyetracking heatmap of a typical web page. (Nielsen Norman Group)" },
   ],
   trailingParagraphs: [
     "The eyetracking data shows the pattern clearly. Eyes start at the top-left of the page, drift across the first line, drop down a few lines, and scan down the left margin. Headlines, opening words of paragraphs, and visually distinct elements get attention. The middle of paragraphs gets ignored.",
@@ -132,10 +132,11 @@ const CARDS = [
   },
     ],
 
-    reveal: "The reader's purpose is to extract a verdict quickly. The writer's purpose is to make that verdict favorable. To do that, the writing has to be \"universal and relatable, so busy hiring managers can immediately understand what they're reading\" (Teo and Newhook). Think about how to communicate competence in the time it takes someone to skim.",
+    reveal: "The reader's purpose is to extract a verdict quickly. The writer's purpose is to make that verdict favorable. To do that, the writing has to be \"universal and relatable, so busy hiring managers can immediately understand what they're reading\" ³. Think about how to communicate competence in the time it takes someone to skim.",
     citations: [
       { num: "1", text: "Krause, Rachel. \“5 Steps to Creating a UX-Design Portfolio.\” Nielsen Norman Group, 4 Aug. 2019, www.nngroup.com/articles/ux-design-portfolios/." },
       { num: "2", text: "Pernice, Kara, et al. How People Read on the Web: The Eyetracking Evidence. Nielsen Norman Group, 2014." },
+      { num: "3", text: "Teo, Y. S. and Newhook, J. (2024, November 1). How to Write UX/UI Design Case Studies That Boost Your Portfolio and Get You Hired. IxDF - Interaction Design Foundation. https://ixdf.org/literature/article/how-to-write-great-case-studies-for-your-ux-design-portfolio" },
     ],
   },
 },
@@ -161,7 +162,7 @@ detail: {
       "Picture a triangle balanced on its point. The broad facts sit at the top. Smaller and more specific details stack below, narrowing as they go down. The shape gives the structure its name.",
     ],
     examples: [
-    { label: "Hero shot", image: "img/example-d.jpg", width: "80%", caption: "Figure 1. Eyetracking heatmap of a typical web page, 2014, digital image, Nielsen Norman Group, www.nngroup.com/reports/how-people-read-web-eyetracking-evidence/." },
+    { label: "Hero shot", image: "img/example-d.jpg", width: "80%", caption: "The inverted pyramid structure used in journalism. Broadest facts at the top, narrowing details below. (NMU Writing Center)" },
   ],
   trailingParagraphs: [
     "The pyramid is built for readers who do not finish what they start. Some read the first sentence, others read the first paragraph, and only a few read the whole thing. The structure works for all of them. NN/g writes that with this style, \"readers can stop reading at any point on the page and still come away with the main point\"<sup>1</sup>.",
@@ -198,7 +199,7 @@ detail: {
       "The hook for this Handshake project does multiple jobs as a main section. The headline names the problem and the outcome at the same time. \"Redesigning the weekly job digest to increase student engagement by ~22%\" tells the reader what was being designed and what changed because of it, all in a single line. A recruiter who reads only this headline still walks away with the project's main claim.",
     ],
     examples: [
-    { label: "Hero shot", image: "img/example-e.png", caption: "Figure 1. Eyetracking heatmap of a typical web page, 2014, digital image, Nielsen Norman Group, www.nngroup.com/reports/how-people-read-web-eyetracking-evidence/." },
+    { label: "Hero shot", image: "img/example-e.png", caption: "Handshake case study portfolio hook. Headline, labeled metadata, and hero image stack into a single overview block. From: https://www.justinmasondesign.com/projects/handshake-email" },
   ],
   trailingParagraphs: [
     "Below the headline, the role, context, and timeline sit in a clean horizontal grid. These three fields answer the questions a recruiter asks first: who did this work, in what setting, and over how long. The reader can scan them in under 5 seconds.",
@@ -211,7 +212,10 @@ detail: {
     ],
       reveal: "The genre doesn't tolerate slow-burning tension or a chronological reveal of the solution. A successful overview compresses the entire narrative arc (the action taken and the impact) into a single, punchy headline. It acknowledges that the reader might only read that one line, so that line must contain the ultimate proof of value.",
       citations: [
-        { num: "1", text: "Nielsen Norman Group. \"UX Portfolios.\" Accessed May 2026." },
+        { num: "1", text: "Wang, Huei-Hsin. “Homepage Design: 5 Fundamental Principles.” Nielsen Norman Group, 15 Mar. 2024, www.nngroup.com/articles/homepage-design-principles/." },
+        { num: "2", text: "Whitenton, Kathryn. “Image-Focused Design: Is Bigger Better?” Nielsen Norman Group, 28 Sept. 2014, www.nngroup.com/articles/image-focused-design/." },
+        { num: "3", text: "Norman, Donald. (2002). Emotion & Design: Attractive Things Work Better. Interactions Magazine. 9. 36-42. 10.1145/543434.543435." },
+        { num: "4", text: "https://www.justinmasondesign.com/projects/handshake-email" },
       ],
     },
   },
@@ -247,32 +251,35 @@ detail: {
 
 const REFERENCES = [
   {
-    text: "Bawarshi, Anis S., and Mary Jo Reiff. \"Guidelines for Analyzing Genres.\" <em>Genre: An Introduction to History, Theory, Research, and Pedagogy</em>. Parlor Press, 2010.",
-    meta: "Scholarly chapter · Course reading",
+    text: "Krause, Rachel. \"5 Steps to Creating a UX-Design Portfolio.\" <em>Nielsen Norman Group</em>, 4 Aug. 2019, nngroup.com/articles/ux-design-portfolios/.",
   },
   {
-    text: "Bickmore, Lisa. \"Genre in the Wild: Understanding Genre Within Rhetorical (Eco)Systems.\" <em>Open English @ SLCC</em>, 2016.",
-    meta: "Open-access chapter · Course reading",
+    text: "\"News Article Structure.\" <em>NMU Writing Center</em>, Northern Michigan University, nmu.edu/writingcenter/inverted-pyramid.",
   },
   {
-    text: "Interaction Design Foundation. \"How to Write Great Case Studies for Your UX Design Portfolio.\" <em>interaction-design.org</em>. Accessed May 2026.",
-    meta: "Practitioner article · interaction-design.org",
-  },
-  {
-    text: "Nielsen Norman Group. \"UX Portfolios.\" <em>nngroup.com</em>. Accessed May 2026.",
-    meta: "Research article · nngroup.com",
+    text: "Norman, Donald. \"Emotion & Design: Attractive Things Work Better.\" <em>Interactions</em>, vol. 9, no. 4, 2002, pp. 36–42, doi.org/10.1145/543434.543435.",
   },
   {
     text: "Pernice, Kara, et al. <em>How People Read on the Web: The Eyetracking Evidence</em>. Nielsen Norman Group, 2014.",
-    meta: "Research report · NN/g",
+  },
+  {
+    text: "Schade, Amy. \"Inverted Pyramid: Writing for Comprehension.\" <em>Nielsen Norman Group</em>, 12 Feb. 2018, nngroup.com/articles/inverted-pyramid/.",
+  },
+  {
+    text: "Teo, Y. S., and J. Newhook. \"How to Write UX/UI Design Case Studies That Boost Your Portfolio and Get You Hired.\" <em>Interaction Design Foundation</em>, 1 Nov. 2024, ixdf.org/literature/article/how-to-write-great-case-studies-for-your-ux-design-portfolio.",
+  },
+  {
+    text: "Wang, Huei-Hsin. \"Homepage Design: 5 Fundamental Principles.\" <em>Nielsen Norman Group</em>, 15 Mar. 2024, nngroup.com/articles/homepage-design-principles/.",
+  },
+  {
+    text: "Whitenton, Kathryn. \"Image-Focused Design: Is Bigger Better?\" <em>Nielsen Norman Group</em>, 28 Sept. 2014, nngroup.com/articles/image-focused-design/.",
   },
 ];
 
 const PORTFOLIO_EXAMPLES = [
-  { id: "A", name: "Portfolio Example A", note: "Placeholder for first analyzed portfolio overview." },
-  { id: "B", name: "Portfolio Example B", note: "Placeholder for second analyzed portfolio overview." },
-  { id: "C", name: "Portfolio Example C", note: "Placeholder for third analyzed portfolio overview." },
-  { id: "D", name: "Portfolio Example D", note: "Optional fourth analyzed portfolio overview." },
+  { id: "A", name: "Elaine Wu - MongoDB", note: "https://www.elainewu.design/mongodb-v4" },
+  { id: "B", name: "Jason Spielman - NotebookLM", note: "https://jasonspielman.com/notebooklm" },
+  { id: "C", name: "Justin Mason - Handshake", note: "https://justinmason.com/projects/handshake-email" },
 ];
 
 Object.assign(window, { CARDS, PALETTES, REFERENCES, PORTFOLIO_EXAMPLES });
