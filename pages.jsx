@@ -492,22 +492,8 @@ function AIUsePage({ navigate }) {
       </p>
 
       <div className="prose animate-fade-up delay-3">
-        <p><em className="callout">Placeholder declaration.</em> Replace the paragraphs below with your final statement before submission.</p>
-        <p>
-          <strong>Tools used.</strong> Name the generative AI tools used during this composition (for example, drafting assistants, code generation, image tools). Include version numbers if known and the dates of use.
-        </p>
-        <p>
-          <strong>How they were used.</strong> Describe what the tools generated, what you prompted, and what you kept versus rejected. Be specific: &ldquo;used to brainstorm card structure,&rdquo; &ldquo;used to draft initial card copy that I then rewrote,&rdquo; &ldquo;used to scaffold the React routing logic,&rdquo; etc.
-        </p>
-        <p>
-          <strong>What you authored.</strong> State which parts of the composition are your own writing, design, and analysis. Genre analysis, rhetorical claims, and editorial decisions are yours.
-        </p>
-        <p>
-          <strong>Verification.</strong> Confirm that all factual claims, statistics, and citations were checked against the original sources, and that any AI-generated text has been edited for accuracy and voice.
-        </p>
-        <p>
-          <strong>Course policy.</strong> Reference the specific UWP course policy on generative AI you are operating under.
-        </p>
+        <p><em className="callout">Declaration.</em></p>
+
       </div>
     </div>
   );

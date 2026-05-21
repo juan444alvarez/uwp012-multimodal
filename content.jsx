@@ -102,7 +102,7 @@ const CARDS = [
     eyebrow: "Rhetorical situation",
     tag: "Participants",
     title: "Read while hiring.",
-    blurb: "Overviews are shaped by who reads them, how fast, and why. The overview is engineered for short windows of attention,",
+    blurb: "Overviews are shaped by who reads them, how fast, and why. The overview is engineered for short windows of attention.",
     palette: PALETTES["30-seconds"],
     summary: "Overviews exist because their two audiences read differently. The genre is calibrated to survive a scan first, and to reward a deeper read second.",
     detail: {
