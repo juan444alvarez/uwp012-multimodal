@@ -38,21 +38,12 @@ const PALETTES = {
       { color: "#6ee7b7", pos: { top: "58%", left: "8%" }, size: "48%" },
     ],
   },
-  "scannable-architecture": {
-    name: "",
-    swatch: "#818cf8",
-    blobs: [
-      { color: "#4f46e5", pos: { top: "-10%", left: "-8%" }, size: "82%" },
-      { color: "#f9a8d4", pos: { top: "38%", left: "44%" }, size: "70%" },
-      { color: "#a5b4fc", pos: { top: "60%", left: "5%" }, size: "55%" },
-    ],
-  },
   "your-turn": {
     name: "",
     swatch: "#9a3412",
     blobs: [
       { color: "#7f1d1d", pos: { top: "-15%", left: "-10%" }, size: "82%" },
-      { color: "#9a3412", pos: { top: "40%", left: "42%" }, size: "70%" },
+      { color: "#db60bc", pos: { top: "40%", left: "42%" }, size: "70%" },
       { color: "#b91c1c", pos: { top: "58%", left: "0%" }, size: "60%" },
     ],
   },
@@ -67,14 +58,14 @@ const CARDS = [
     title: "Meet the genre.",
     blurb: "A UX case study overview is the opening section of a portfolio project page. It is closer to an executive summary than an introduction.",
     palette: PALETTES["meet-the-genre"],
-    summary: "The UX case study overview is a distinct text-based genre that lives at the top of portfolio project pages. It establishes context, results, and stakes before the process walkthrough begins.",
+    summary: "A UX case study overview is the opening section of a portfolio project page. It is closer to an executive summary than an introduction.",
     detail: {
       explanationHeading: "What an overview actually is",
       examplesHeading: "In a real portfolio",
       explanation: [
         "Every UX portfolio project page opens with an overview. It's usually the first screen you see when you click into a designer's project: a headline, a hero image, a few tight blocks of metadata, and a short paragraph or two summarizing what the project was and what it accomplished.",
         "The overview is doing the heaviest rhetorical lifting on the page. It tells a recruiter whether the project is worth their attention, signals the designer's seniority, and frames everything that follows. The full case study below it can run thousands of words, but the overview decides whether those words ever get read.",
-        "Think of an overview as something closer to an executive summary, a film logline, or the abstract of a research paper. Each of these openings has the same job. They communicate the full shape of something longer in a small amount of space, so a reader can walk away with the main idea even if they never read past the opening. IxDF describes it as \"an introduction, or 'exposition,' that sets the scene for the rest of the case study\" (Teo and Newhook). The overview sets up the project, names the stakes, and gives the reader enough to decide whether to keep going. It works as a self-contained unit, complete on its own.",
+        "Think of an overview as something closer to an executive summary, or the abstract of a research paper. They communicate the idea of something longer in a small amount of space, so a reader can walk away with the main idea even if they never read past the opening. IxDF describes it as \"an introduction, or 'exposition,' that sets the scene for the rest of the case study\"<sup>1</sup>. The overview sets up the project, names the stakes, and gives the reader enough to decide whether to keep going.",
       ],
       bulletsHeading: "What lives inside an overview",
       bullets: [
@@ -86,55 +77,68 @@ const CARDS = [
       reveal: "Once you see overviews as a genre, you stop asking \"how do I describe my project?\" and start asking \"what does this genre expect, and how do I make my project legible inside it?\"",
       citations: [
         { num: "1", text: "Teo, Y. S. and Newhook, J. (2024, November 1). How to Write UX/UI Design Case Studies That Boost Your Portfolio and Get You Hired. IxDF - Interaction Design Foundation. https://ixdf.org/literature/article/how-to-write-great-case-studies-for-your-ux-design-portfolio" },
-        { num: "2", text: "Bawarshi, Anis S., and Mary Jo Reiff. \"Guidelines for Analyzing Genres.\" Genre: An Introduction to History, Theory, Research, and Pedagogy. Parlor Press, 2010." },
-        { num: "3", text: "https://jasonspielman.com/notebooklm" },
+        { num: "2", text: "https://jasonspielman.com/notebooklm" },
+        { num: "3", text: "https://www.elainewu.design/mongodb-v4" },
       ],
       examples: [
         { label: "Portfolio Example A — overview block",
           image: "img/example-a.png",
           caption: "Designer's portfolio overview showing project name, role, and metadata in a single hero section stacked above the process narrative. From: https://jasonspielman.com/notebooklm" },
+        { label: "Portfolio Example A — overview block",
+          image: "img/example-b.png",
+          caption: "Designer's portfolio overview showing project name, role, and metadata in a single hero section stacked above the process narrative. From: https://jasonspielman.com/notebooklm" },
       ],
     },
   },
   {
-    id: "30-seconds",
-    num: "02",
-    eyebrow: "Rhetorical situation",
-    tag: "Participants",
-    title: "Read while hiring.",
-    blurb: "Overviews are shaped by who reads them, how fast, and why. The overview is engineered for short windows of attention.",
-    palette: PALETTES["30-seconds"],
-    summary: "Overviews exist because their two audiences read differently. The genre is calibrated to survive a scan first, and to reward a deeper read second.",
-    detail: {
-      explanationHeading: "What an overview actually is",
-      examplesHeading: "In a real portfolio",
-      explanation: [
-        "The situation is hiring. A portfolio site is not a personal blog or a public archive. It is a piece of professional infrastructure that exists inside a competitive labor market. Designers maintain portfolios because the UX industry uses them as the primary evidence of skill, taste, and judgment. A reader does not arrive at a portfolio by accident. They arrive because a designer applied for a role, sent a link in an email, dropped one in a Slack channel, or appeared in a recruiter's search. The page is being read on the job, by someone whose own time is being measured.",
-        "The reader is rarely reading for pleasure or curiosity. They are reading to make a decision. NN/g eyetracking research found that \"79 percent of our test users always scanned any new page they came across; only 16 percent read word-by-word\" (Pernice et al.). Krause is specific about hiring readers in particular. \"Very rarely will hiring managers take the time to read your entire portfolio word for word\" (Krause). The reader's purpose is to extract a verdict quickly.",
-        "\The writer's purpose is to make that verdict favorable. The IxDF guide names the writer's challenge directly. The structure has to be \"universal and relatable, so busy hiring managers can immediately understand what they're reading\" (Teo and Newhook).",
-      ],
-      contextHeading: "Background context",
-      contextParagraphs: [
-        "First paragraph of the extra section.",
-        "Second paragraph. Inline <sup>3</sup> citations work too.",
-      ],
-      bulletsHeading: "Who's actually in the room",
-      bullets: [
-        { b: "Recruiters", t: "scanning dozens of portfolios. They want signal, not story." },
-        { b: "Hiring managers", t: "deciding whether to schedule an interview. They want a confident summary." },
-        { b: "Senior designers", t: "reading carefully to evaluate craft. They want depth — but only after the summary earns it." },
-        { b: "Peers and students", t: "reading to learn. They benefit from the same clarity." },
-      ],
-      reveal: "The patterns in cards three through five all exist because of this card. Once you accept that your reader has thirty seconds, the rest of the genre's choices make sense.",
-      citations: [
-        { num: "1", text: "Pernice, Kara, et al. How People Read on the Web: The Eyetracking Evidence. Nielsen Norman Group, 2014." },
-        { num: "2", text: "Nielsen Norman Group. \"UX Portfolios.\" Accessed May 2026." },
-      ],
-      examples: [
-        { label: "Portfolio Example B — above-the-fold scan", caption: "Heatmap-style placeholder showing where the eye lands first: hero image, then role chunk, then results — text body almost untouched on the first pass." },
-      ],
-    },
+  id: "30-seconds",
+  num: "02",
+  eyebrow: "Rhetorical situation",
+  tag: "Participants",
+  title: "Read while hiring.",
+  blurb: "Overviews are shaped by who reads them, how fast, and why. The overview is engineered for short windows of attention.",
+  palette: PALETTES["30-seconds"],
+  summary: "Overviews are shaped by who reads them, how fast, and why. The overview is engineered for short windows of attention.",
+  detail: {
+    explanationHeading: "What is the situation?",
+    explanation: [
+      "The situation is hiring. Portfolio sites work as professional infrastructure inside a competitive labor market. The UX industry treats them as the primary evidence of a designer's skill, taste, and judgment. Readers reach the page through a hiring channel of some kind. Whether its through an application, link, or search. The page is read on the job, by someone whose own time is being measured.",
+    ],
+
+    extraSections: [
+      {
+        heading: "Participants",
+        paragraphs: [
+          "Rachel Krause at the Nielsen Norman Group names three participant reading groups. \"The 'users' of your portfolio will be hiring managers, recruiters, or fellow UX professionals.\"<sup>1</sup>. Each group reads with a different motive, so your presentation style needs to address their individual priorities.",
+        ],
+        bullets: [
+          { b: "Recruiters are filtering.", t: "They are looking for reasons to advance a candidate to the next stage, or reasons to cut them. Most overviews they open will not get a second look." },
+          { b: "Hiring managers are evaluating.", t: "They want to know whether the work matches the role, whether the designer worked at the right level, and whether the impact is real." },
+          { b: "Fellow designers are studying.", t: "They read more slowly, often to learn how other designers write about their own work, or to assess a peer." },
+        ],
+      },
+      {
+    heading: "Purpose",
+    paragraphs: [
+      "Readers come to the page to make a decision. The Nielsen Norman Group's eyetracking research found that \"79 percent of our test users always scanned any new page they came across; only 16 percent read word-by-word\"<sup>2</sup>. Scanning happens because the brain conserves attention by default. When it lands on an unfamiliar page, it sweeps the surface first, focusing only on elements that catch the eye. This is the standard mode for reading anything on a screen.",
+    ],
+    examples: [
+    { label: "Hero shot", image: "img/example-c.png", width: "50%", caption: "Figure 1. Eyetracking heatmap of a typical web page, 2014, digital image, Nielsen Norman Group, www.nngroup.com/reports/how-people-read-web-eyetracking-evidence/." },
+  ],
+  trailingParagraphs: [
+    "The eyetracking data shows the pattern clearly. Eyes start at the top-left of the page, drift across the first line, drop down a few lines, and scan down the left margin. Headlines, opening words of paragraphs, and visually distinct elements get attention. The middle of paragraphs gets ignored.",
+    "For hiring contexts, the pattern intensifies. Krause is specific about hiring readers. \"Very rarely will hiring managers take the time to read your entire portfolio word for word\"<sup>1</sup>. A recruiter looking at fifty portfolios in a day has built habits to extract a verdict in seconds. Skimming is how they keep up with the volume.",
+  ],
   },
+    ],
+
+    reveal: "The reader's purpose is to extract a verdict quickly. The writer's purpose is to make that verdict favorable. To do that, the writing has to be \"universal and relatable, so busy hiring managers can immediately understand what they're reading\" (Teo and Newhook). Think about how to communicate competence in the time it takes someone to skim.",
+    citations: [
+      { num: "1", text: "Krause, Rachel. \“5 Steps to Creating a UX-Design Portfolio.\” Nielsen Norman Group, 4 Aug. 2019, www.nngroup.com/articles/ux-design-portfolios/." },
+      { num: "2", text: "Pernice, Kara, et al. How People Read on the Web: The Eyetracking Evidence. Nielsen Norman Group, 2014." },
+    ],
+  },
+},
   {
     id: "results-first",
     num: "03",
@@ -143,31 +147,36 @@ const CARDS = [
     title: "Results before the story.",
     blurb: "The inverted pyramid, borrowed from journalism. Strong overviews lead with outcomes before walking through process.",
     palette: PALETTES["results-first"],
-    summary: "Strong overviews put outcomes — metrics, role, impact — at the top, and save the chronological process for the body below.",
-    detail: {
-      explanation: [
-        "Students trained on narrative essays expect to set the scene, walk through a journey, and end with a conclusion. The genre inverts all three. The conclusion comes first.",
-        "This is the inverted pyramid, lifted from journalism and web writing. The most important information sits at the top: what was the impact, what was your role, how big a thing was this. The process — discovery, ideation, testing — comes after.",
-        "The Interaction Design Foundation recommends including a results summary before the full case study begins, for exactly this reason. <cite>— IxDF</cite>",
-      ],
-      bulletsHeading: "What \"results first\" actually looks like",
-      bullets: [
-        { b: "Lead with a number", t: "if you have one. \"Reduced support tickets by 38%.\" Concrete beats abstract." },
-        { b: "Name your role", t: "before naming the team. \"Lead designer\" is a result." },
-        { b: "Surface the stakes", t: "before the strategy. What changed because the work shipped?" },
-        { b: "Keep the process below", t: "It still matters — just not at the top." },
-      ],
-      reveal: "The genre privileges efficiency over chronology because readers may bounce in seconds. Putting the punchline first is not a stylistic flourish; it's a survival strategy.",
-      citations: [
-        { num: "1", text: "Interaction Design Foundation. \"How to Write Great Case Studies for Your UX Design Portfolio.\" Accessed May 2026." },
-        { num: "2", text: "Pernice, Kara, et al. How People Read on the Web: The Eyetracking Evidence. Nielsen Norman Group, 2014." },
-      ],
-      examples: [
-        { label: "Portfolio Example C — results module", caption: "Three-up metrics row above the process narrative, each metric paired with one sentence of context." },
-      ],
-    },
+    summary: "The inverted pyramid, borrowed from journalism. Strong overviews lead with outcomes before walking through process.",
+detail: {
+    explanationHeading: "The pattern expanded:",
+    explanation: [
+      "Students trained on narrative essays expect to set the scene, walk through a journey, and end with a conclusion. This genre inverts the structure so that the conclusion comes first. This is the inverted pyramid, lifted from journalism and web writing. The most important information sits at the top: what was the impact, what was your role, how big a thing was this. The process (discovery, ideation, testing) comes after.",
+    ],
+
+    extraSections: [
+      {
+    heading: "The inverted pyramid",
+    paragraphs: [
+      "Picture a triangle balanced on its point. The broad facts sit at the top. Smaller and more specific details stack below, narrowing as they go down. The shape gives the structure its name.",
+    ],
+    examples: [
+    { label: "Hero shot", image: "img/example-d.jpg", width: "80%", caption: "Figure 1. Eyetracking heatmap of a typical web page, 2014, digital image, Nielsen Norman Group, www.nngroup.com/reports/how-people-read-web-eyetracking-evidence/." },
+  ],
+  trailingParagraphs: [
+    "The pyramid is built for readers who do not finish what they start. Some read the first sentence, others read the first paragraph, and only a few read the whole thing. The structure works for all of them. NN/g writes that with this style, \"readers can stop reading at any point on the page and still come away with the main point\"<sup>1</sup>.",
+    "Academic writing works differently. An academic paper saves its conclusion for the end, so a reader who quits halfway through misses the point entirely. UX overviews follow the journalism model instead, which is imporant because a recruiter often makes a decision on the role and impact alone. The pyramid keeps the overview useful no matter where the reader stops..",
+  ],
   },
-  {
+    ],
+
+    reveal: "The genre treats reading order as a hiring tool. By putting the verdict first, the writer is doing two things at once. They are giving the scanner everything they need to make a fast judgment. Secondly, they are signaling confidence in the work itself, since only a designer who is sure of their outcomes leads with them.",
+    citations: [
+      { num: "1", text: "Schade, Amy. “Inverted Pyramid: Writing for Comprehension.” Nielsen Norman Group, 12 Feb. 2018, www.nngroup.com/articles/inverted-pyramid/. " },
+      { num: "2", text: "“News Article Structure.” NMU Writing Center, Northern Michigan University, nmu.edu/writingcenter/inverted-pyramid. " },
+    ],
+  },
+},  {
     id: "hook-and-preview",
     num: "04",
     eyebrow: "Pattern · Visual rhetoric",
@@ -175,12 +184,12 @@ const CARDS = [
     title: "Hook and preview.",
     blurb: "A single striking visual sits above a tight headline. Together, they do work that text alone can't do fast enough and engage readers.",
     palette: PALETTES["hook-and-preview"],
-    summary: "Overviews lead with a hero image or prototype frame and a tight headline. The visual grabs attention; the headline names the problem.",
+    summary: "A single striking visual sits above a tight headline. Together, they do work that text alone can't do fast enough and engage readers.",
     detail: {
       explanation: [
         "Open almost any strong portfolio and the first thing you see is a single, deliberate image: a hero shot of the product, a prototype mid-interaction, a piece of branded artwork. Not three thumbnails. Not a slideshow. One image, doing one job.",
-        "Pair the hook with a tight headline. The headline frames the problem in a sentence or fragment — short enough to read in passing, sharp enough to make the reader want the next line.",
-        "Visual rhetoric is doing real work here. It's establishing tone, telegraphing craft, and committing to a specific kind of project before a single body paragraph appears.",
+        "Pair the hook with a tight headline. The headline frames the problem in a sentence or fragment in a way that is short enough to read in passing, and sharp enough to make the reader want the next line.",
+        "Visual rhetoric is doing lots of work here. It's establishing tone, telegraphing craft, and associating a projects visual tone and feel before a single paragraph appears.",
       ],
       bulletsHeading: "Anatomy of a hook",
       bullets: [
@@ -199,40 +208,8 @@ const CARDS = [
     },
   },
   {
-    id: "scannable-architecture",
-    num: "05",
-    eyebrow: "Pattern · Format + diction",
-    tag: "Pattern 3",
-    title: "Scannable architecture.",
-    blurb: "Sub-headings, chunked sections, bolded keywords, short noun-phrase headers. Every chunk answers one recruiter question.",
-    palette: PALETTES["scannable-architecture"],
-    summary: "Overviews chunk information into labeled blocks — Role, Timeline, Team, Tools — and write in short noun phrases rather than full sentences.",
-    detail: {
-      explanation: [
-        "The body of an overview is rarely prose. It's a grid of labeled chunks: Role, Timeline, Team, Tools, Platform, Outcome. Each chunk is a tiny answer to a question a recruiter would have asked.",
-        "Diction is tight. Noun phrases, not sentences. \"Lead product designer\" instead of \"I served as the lead product designer on this project.\" Bullets get bolded keywords so the eye finds them.",
-        "The format is a hybrid. It borrows résumé conventions — chunked credentials — and web-article conventions — scannable headers and bolded keys — at the same time. Both because its readers come from both worlds.",
-      ],
-      bulletsHeading: "Conventions you'll see again and again",
-      bullets: [
-        { b: "Labeled chunks", t: "Role · Timeline · Team · Tools · Outcome. Recognizable at a glance." },
-        { b: "Noun-phrase headers", t: "\"The problem,\" not \"What was the problem we were trying to solve?\"" },
-        { b: "Bolded keys", t: "for product names, metrics, and role titles." },
-        { b: "Short paragraphs", t: "Two lines, then air. Anything longer gets skipped." },
-      ],
-      reveal: "The overview is a hybrid genre because its readers are hybrid. Recruiters bring résumé-reading habits; designers bring web-reading habits; the format is doing both jobs at once.",
-      citations: [
-        { num: "1", text: "Pernice, Kara, et al. How People Read on the Web: The Eyetracking Evidence. Nielsen Norman Group, 2014." },
-        { num: "2", text: "Bickmore, Lisa. \"Genre in the Wild: Understanding Genre Within Rhetorical (Eco)Systems.\" Open English @ SLCC, 2016." },
-      ],
-      examples: [
-        { label: "Portfolio Example E — chunked credentials", caption: "Four-column row: Role, Timeline, Team, Tools. Each column is two lines max, no full sentences." },
-      ],
-    },
-  },
-  {
     id: "your-turn",
-    num: "06",
+    num: "05",
     eyebrow: "Advice",
     tag: "Takeaway",
     title: "Writing your own.",

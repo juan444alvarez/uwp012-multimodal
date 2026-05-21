@@ -152,9 +152,9 @@ function CarouselCard({ card, idx, total, onOpen }) {
 }
 
 // ---------- Reusable: example placeholder + reveal box ----------
-function ExamplePlaceholder({ label, caption, image }) {
+function ExamplePlaceholder({ label, caption, image, width }) {
   return (
-    <figure className="mt-[22px] mb-0 border border-white/[0.08] rounded-[14px] overflow-hidden bg-bg-elev">
+    <figure className="mt-[22px] mb-0 border border-white/[0.08] rounded-[14px] overflow-hidden bg-bg-elev mx-auto"       style={width ? { maxWidth: width } : undefined}>
       {image ? (
         <img
           src={image}

@@ -134,7 +134,7 @@ function HomePage({ navigate }) {
           </h1>
         </div>
         <p className="max-w-[38ch] text-ink-muted text-[15px] leading-[1.55] animate-fade-up delay-1">
-          Six cards on a single genre:{" "}
+          5 cards on a single genre:{" "}
           <strong className="text-ink font-medium">the overview section</strong>{" "}
           at the top of UX portfolio case studies. What it is, who it's for,
           why it looks the way it does, and how to write your own.
@@ -296,34 +296,75 @@ function DetailPage({ cardId, navigate }) {
           </div>
         </section>
 
-        {d.contextParagraphs && (
-  <>
+        {d.extraSections && d.extraSections.map((s, i) => (
+  <React.Fragment key={i}>
     <div className="h-px bg-white/[0.08] my-10"></div>
     <section className="animate-fade-up">
-      <h2 className={sectionH2}>{d.contextHeading || "Context"}</h2>
-      <div className="prose">
-        {d.contextParagraphs.map((p, i) => (
-          <HTMLProse key={i} html={p} />
-        ))}
-      </div>
+      {s.heading && <h2 className={sectionH2}>{s.heading}</h2>}
+
+      {s.paragraphs && s.paragraphs.length > 0 && (
+        <div className="prose">
+          {s.paragraphs.map((p, j) => (
+            <HTMLProse key={j} html={p} />
+          ))}
+        </div>
+      )}
+
+      {s.bullets && s.bullets.length > 0 && (
+        <ul className={`m-0 p-0 list-none flex flex-col gap-3.5 ${s.paragraphs ? "mt-6" : ""}`}>
+          {s.bullets.map((b, j) => (
+            <li
+              key={j}
+              className="flex gap-3.5 text-[16px] leading-[1.55] text-ink
+                         before:content-[''] before:shrink-0 before:basis-1.5 before:h-1.5
+                         before:rounded-full before:bg-ink-muted before:mt-2.5"
+            >
+              <span>
+                {b.b && <b className="text-ink-strong font-medium mr-1.5">{b.b}</b>}
+                {b.t}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {s.examples && s.examples.length > 0 && (
+        <div className={s.paragraphs || s.bullets ? "mt-6" : ""}>
+          {s.examples.map((ex, j) => (
+            <ExamplePlaceholder key={j} label={ex.label} caption={ex.caption} image={ex.image} width={ex.width} />
+          ))}
+        </div>
+      )}
+
+      {s.trailingParagraphs && s.trailingParagraphs.length > 0 && (
+  <div className="prose mt-6">
+    {s.trailingParagraphs.map((p, j) => (
+      <HTMLProse key={j} html={p} />
+    ))}
+  </div>
+)}
+    </section>
+  </React.Fragment>
+))}
+
+        
+
+        {d.examples && d.examples.length > 0 && (
+  <>
+    <div className="h-px bg-white/[0.08] my-16"></div>
+
+    <section>
+      <h2 className={sectionH2}>How it looks in the wild</h2>
+      {d.examples.map((ex, i) => (
+        <ExamplePlaceholder key={i} label={ex.label} caption={ex.caption} image={ex.image} width={ex.width} />
+      ))}
     </section>
   </>
 )}
 
-        <div className="h-px bg-white/[0.08] my-10"></div>
-
-        
-
+        {d.bullets && d.bullets.length > 0 && (
         <section>
-          <h2 className={sectionH2}>{d.examplesHeading || "How it looks in the wild"}</h2>
-          {d.examples.map((ex, i) => (
-            <ExamplePlaceholder key={i} label={ex.label} caption={ex.caption} image={ex.image} />
-          ))}
-        </section>
-
-        <div className="h-px bg-white/[0.08] my-12"></div>
-
-        <section>
+          <div className="h-px bg-white/[0.08] my-12"></div>
           <h2 className={sectionH2}>{d.bulletsHeading}</h2>
           <ul className="m-0 p-0 list-none flex flex-col gap-3.5">
             {d.bullets.map((b, i) => (
@@ -341,6 +382,7 @@ function DetailPage({ cardId, navigate }) {
             ))}
           </ul>
         </section>
+        )}
 
         <div className="h-px bg-white/[0.08] my-12"></div>
 
