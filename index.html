@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Overview — A field guide to UX case study openers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          bg: { DEFAULT: "#0a0a0a", elev: "#0f0f0f", card: "#111111" },
+          ink: { DEFAULT: "#ededed", strong: "#f5f5f5", muted: "#888888", faint: "#555555" },
+        },
+        fontFamily: {
+          sans: ["Geist", "ui-sans-serif", "system-ui", "-apple-system", "sans-serif"],
+          mono: ["Geist Mono", "ui-monospace", "SFMono-Regular", "monospace"],
+          serif: ["Instrument Serif", "serif"],
+        },
+        letterSpacing: {
+          tightest: "-0.035em",
+          tightish: "-0.028em",
+          mono: "0.14em",
+          monoWide: "0.16em",
+        },
+        maxWidth: { read: "720px" },
+        boxShadow: {
+          card: "0 0 0 1px rgba(255,255,255,0.08)",
+        },
+        keyframes: {
+          fadeUp: {
+            from: { opacity: "0", transform: "translateY(8px)" },
+            to: { opacity: "1", transform: "translateY(0)" },
+          },
+        },
+        animation: {
+          "fade-up": "fadeUp 380ms cubic-bezier(0.22, 1, 0.36, 1) both",
+        },
+        transitionTimingFunction: {
+          "out-quart": "cubic-bezier(0.22, 1, 0.36, 1)",
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html, body { margin: 0; padding: 0; }
+  * { box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    color: #ededed;
+    font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: "ss01", "cv11";
+    font-size: 15px;
+    line-height: 1.55;
+    letter-spacing: -0.005em;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  ::selection { background: rgba(255,255,255,0.18); color: #f5f5f5; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+
+  /* hide scrollbar on horizontal carousel */
+  .scrollbar-hide { scrollbar-width: none; -ms-overflow-style: none; }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+  /* staggered fade-up delays */
+  .delay-1 { animation-delay: 60ms; }
+  .delay-2 { animation-delay: 120ms; }
+  .delay-3 { animation-delay: 180ms; }
+  .delay-4 { animation-delay: 240ms; }
+
+  /* prose paragraphs come from data (HTML strings); style by tag */
+  .prose p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: #ededed;
+    margin: 0 0 18px;
+    max-width: 60ch;
+    text-wrap: pretty;
+  }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose strong { color: #f5f5f5; font-weight: 500; }
+  .prose em.callout {
+    font-family: "Instrument Serif", serif;
+    font-style: italic;
+    font-size: 1.1em;
+    color: #f5f5f5;
+  }
+  .prose cite {
+    font-style: normal;
+    color: #888888;
+    font-size: 0.92em;
+    font-family: "Geist Mono", monospace;
+    letter-spacing: 0.02em;
+  }
+  .declaration .prose p { max-width: 62ch; }
+
+  /* references / citations: <em> inside HTML strings */
+  .refs em { color: #f5f5f5; font-style: italic; }
+  .cites em { color: #ededed; font-style: italic; }
+
+  /* respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* drag-state cursor override */
+  .is-grabbing, .is-grabbing * { cursor: grabbing !important; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="content.jsx"></script>
+<script type="text/babel" src="components.jsx"></script>
+<script type="text/babel" src="pages.jsx"></script>
+</body>
+</html>
