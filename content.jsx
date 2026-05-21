@@ -187,23 +187,31 @@ detail: {
     summary: "A single striking visual sits above a tight headline. Together, they do work that text alone can't do fast enough and engage readers.",
     detail: {
       explanation: [
-        "Open almost any strong portfolio and the first thing you see is a single, deliberate image: a hero shot of the product, a prototype mid-interaction, a piece of branded artwork. Not three thumbnails. Not a slideshow. One image, doing one job.",
+        "Open almost any strong portfolio and the first thing you see is a single, deliberate image: a hero shot of the product, a prototype mid-interaction, or piece of branded artwork.",
         "Pair the hook with a tight headline. The headline frames the problem in a sentence or fragment in a way that is short enough to read in passing, and sharp enough to make the reader want the next line.",
-        "Visual rhetoric is doing lots of work here. It's establishing tone, telegraphing craft, and associating a projects visual tone and feel before a single paragraph appears.",
+        "Visual rhetoric is doing a lot of work here. The image establishes tone, signals craft, and communicates the project's visual identity before a single paragraph is read. Huei-Hsin Wang at NN/g writes that \"the content above the fold serves as a gatekeeper, determining whether users will engage further with your site\"<sup>1</sup>. For a UX overview, the hook is that gatekeeper. If the visual fails, the writing may not get a chance to recover the reader's attention.",
       ],
-      bulletsHeading: "Anatomy of a hook",
-      bullets: [
-        { b: "One image", t: "not five. Restraint signals confidence." },
-        { b: "A noun-phrase headline", t: "that names the problem or the outcome." },
-        { b: "A subhead", t: "of one to two lines — context, not narrative." },
-        { b: "Whitespace around it", t: "so the eye can actually rest on what you chose." },
-      ],
-      reveal: "The genre treats attention as the scarce resource. The hook does work text alone cannot do fast enough — it earns the reader's next three seconds.",
+  extraSections: [
+      {
+    heading: "In practice",
+    paragraphs: [
+      "The hook for this Handshake project does multiple jobs as a main section. The headline names the problem and the outcome at the same time. \"Redesigning the weekly job digest to increase student engagement by ~22%\" tells the reader what was being designed and what changed because of it, all in a single line. A recruiter who reads only this headline still walks away with the project's main claim.",
+    ],
+    examples: [
+    { label: "Hero shot", image: "img/example-e.png", caption: "Figure 1. Eyetracking heatmap of a typical web page, 2014, digital image, Nielsen Norman Group, www.nngroup.com/reports/how-people-read-web-eyetracking-evidence/." },
+  ],
+  trailingParagraphs: [
+    "Below the headline, the role, context, and timeline sit in a clean horizontal grid. These three fields answer the questions a recruiter asks first: who did this work, in what setting, and over how long. The reader can scan them in under 5 seconds.",
+    "Visual evidence has to land first because the reader may never get to the words. Kathryn Whitenton at NN/g writes that \"compelling images have a unique ability to inspire and engage your audience\"<sup>2</sup>, drawing on Don Norman's work on visceral response.",
+    "By the time the reader reaches the first paragraph of writing, the image has primed them at the visceral level. Don Norman describes this as the fastest layer of cognitive processing, the one that \"makes rapid judgments of what is good or bad, safe or dangerous\"<sup>3</sup>. The visceral response forms in milliseconds and then shapes the slower layers above it (behavioral and reflective). In Norman's model, critical thinking cannot bypass the first impression. It can only try to bias what comes next.",
+    "For a hiring manager scanning dozens of portfolios in a day, the consequences are direct. A positive visceral response buys the writing time to make its case. A negative one means the reader is reading against their own first impression, and that is hard work most will not bother to do.",
+  ],
+  
+  },
+    ],
+      reveal: "The genre doesn't tolerate slow-burning tension or a chronological reveal of the solution. A successful overview compresses the entire narrative arc (the action taken and the impact) into a single, punchy headline. It acknowledges that the reader might only read that one line, so that line must contain the ultimate proof of value.",
       citations: [
         { num: "1", text: "Nielsen Norman Group. \"UX Portfolios.\" Accessed May 2026." },
-      ],
-      examples: [
-        { label: "Portfolio Example D — hero composition", caption: "Single full-bleed product visual with a short noun-phrase headline beneath. No carousel, no thumbnails." },
       ],
     },
   },
@@ -215,7 +223,7 @@ detail: {
     title: "Writing your own.",
     blurb: "Five concrete moves for writing an overview that survives a thirty-second scan and rewards a careful read.",
     palette: PALETTES["your-turn"],
-    summary: "The patterns above point to a small set of moves. Make them on purpose, and your overview reads as fluent in the genre instead of confused by it.",
+    summary: "Five concrete moves for writing an overview that survives a thirty-second scan and rewards a careful read.",
     detail: {
       explanation: [
         "If the cards before this one are the analysis, this one is the payoff. Five concrete moves to make when you sit down to write your own overview.",
@@ -229,13 +237,9 @@ detail: {
         { b: "Treat the hook image as load-bearing.", t: "Pick one. Make it good. It's earning your next three seconds." },
         { b: "Write two versions and layer them.", t: "One for the scanner, one for the reader. Stack the scanner version on top." },
       ],
-      reveal: "An overview isn't a creative writing exercise. It's a small, well-designed object that has to survive a glance and reward a read. Both jobs. Same paragraph.",
+      reveal: "A successful overview is a well-designed tool. It must instantly make sense during a quick glance, while also offering deep value to anyone who reads it closely. It does both jobs at the exact same time.",
       citations: [
-        { num: "1", text: "Interaction Design Foundation. \"How to Write Great Case Studies for Your UX Design Portfolio.\" Accessed May 2026." },
-        { num: "2", text: "Nielsen Norman Group. \"UX Portfolios.\" Accessed May 2026." },
-      ],
-      examples: [
-        { label: "Portfolio Example F — before & after", caption: "Side-by-side placeholder: a verbose narrative opener on the left, a chunked results-first rewrite on the right." },
+        { num: "", text: "" },
       ],
     },
   },
