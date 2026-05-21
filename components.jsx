@@ -152,19 +152,27 @@ function CarouselCard({ card, idx, total, onOpen }) {
 }
 
 // ---------- Reusable: example placeholder + reveal box ----------
-function ExamplePlaceholder({ label, caption }) {
+function ExamplePlaceholder({ label, caption, image }) {
   return (
     <figure className="mt-[22px] mb-0 border border-white/[0.08] rounded-[14px] overflow-hidden bg-bg-elev">
-      <div
-        className="aspect-[16/9] flex flex-col items-center justify-center gap-2.5 text-ink-muted"
-        style={{
-          background:
-            "repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 14px), #141414",
-        }}
-      >
-        <span className="font-mono text-[11px] tracking-monoWide uppercase">{label}</span>
-        <span className="text-[12px] text-ink-faint font-mono">screenshot placeholder</span>
-      </div>
+      {image ? (
+        <img
+          src={image}
+          alt={label}
+          className="block w-full h-auto object-cover"
+        />
+      ) : (
+        <div
+          className="aspect-[16/9] flex flex-col items-center justify-center gap-2.5 text-ink-muted"
+          style={{
+            background:
+              "repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 14px), #141414",
+          }}
+        >
+          <span className="font-mono text-[11px] tracking-monoWide uppercase">{label}</span>
+          <span className="text-[12px] text-ink-faint font-mono">screenshot placeholder</span>
+        </div>
+      )}
       <figcaption className="px-[18px] py-3.5 text-[13px] text-ink-muted italic border-t border-white/[0.08] bg-white/[0.015]">
         {caption}
       </figcaption>
@@ -174,11 +182,11 @@ function ExamplePlaceholder({ label, caption }) {
 
 function RevealBox({ children }) {
   return (
-    <div className="border-y border-white/[0.08] py-7 relative">
+    <div className="relative pb-11">
       <div className="font-mono text-[11px] tracking-mono uppercase text-ink-muted mb-3.5">
         What this reveals
       </div>
-      <div className="text-[18px] leading-[1.5] text-ink-strong font-serif italic tracking-[-0.005em] max-w-[50ch] [text-wrap:pretty]">
+      <div className="text-[18px] leading-[1.5] text-ink-strong  max-w-[50ch] [text-wrap:pretty]">
         {children}
       </div>
     </div>

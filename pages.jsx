@@ -125,7 +125,7 @@ function HomePage({ navigate }) {
       <div className="px-[22px] md:px-10 flex items-end justify-between gap-8 flex-wrap mb-9">
         <div className="animate-fade-up">
           <div className="font-mono text-[11px] tracking-[0.12em] uppercase text-ink-muted">
-            A field guide · UWP / Genre analysis
+            UWP012 A01 / Multimodal Genre Analysis
           </div>
           <h1 className="mt-3.5 mb-0 font-medium text-ink-strong tracking-tightest leading-[1.02] max-w-[12ch] text-[clamp(38px,5.4vw,72px)]">
             The UX case study{" "}
@@ -285,10 +285,10 @@ function DetailPage({ cardId, navigate }) {
           {card.summary}
         </p>
 
-        <div className="h-px bg-white/[0.08] my-16"></div>
+        <div className="h-px bg-white/[0.08] my-10"></div>
 
         <section className="animate-fade-up">
-          <h2 className={sectionH2}>The pattern, expanded</h2>
+          <h2 className={sectionH2}>{d.explanationHeading || "The pattern, expanded"}</h2>
           <div className="prose">
             {d.explanation.map((p, i) => (
               <HTMLProse key={i} html={p} />
@@ -296,16 +296,32 @@ function DetailPage({ cardId, navigate }) {
           </div>
         </section>
 
-        <div className="h-px bg-white/[0.08] my-16"></div>
+        {d.contextParagraphs && (
+  <>
+    <div className="h-px bg-white/[0.08] my-10"></div>
+    <section className="animate-fade-up">
+      <h2 className={sectionH2}>{d.contextHeading || "Context"}</h2>
+      <div className="prose">
+        {d.contextParagraphs.map((p, i) => (
+          <HTMLProse key={i} html={p} />
+        ))}
+      </div>
+    </section>
+  </>
+)}
+
+        <div className="h-px bg-white/[0.08] my-10"></div>
+
+        
 
         <section>
-          <h2 className={sectionH2}>How it looks in the wild</h2>
+          <h2 className={sectionH2}>{d.examplesHeading || "How it looks in the wild"}</h2>
           {d.examples.map((ex, i) => (
-            <ExamplePlaceholder key={i} label={ex.label} caption={ex.caption} />
+            <ExamplePlaceholder key={i} label={ex.label} caption={ex.caption} image={ex.image} />
           ))}
         </section>
 
-        <div className="h-px bg-white/[0.08] my-16"></div>
+        <div className="h-px bg-white/[0.08] my-12"></div>
 
         <section>
           <h2 className={sectionH2}>{d.bulletsHeading}</h2>
@@ -326,10 +342,9 @@ function DetailPage({ cardId, navigate }) {
           </ul>
         </section>
 
-        <div className="h-px bg-white/[0.08] my-16"></div>
+        <div className="h-px bg-white/[0.08] my-12"></div>
 
         <section>
-          <h2 className={sectionH2}>What this pattern reveals</h2>
           <RevealBox>{d.reveal}</RevealBox>
         </section>
 
