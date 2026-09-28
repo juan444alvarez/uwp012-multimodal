@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>@keyframes bcspin{to{transform:rotate(360deg)}}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="chemistry-data.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0b0b0e;color:#ececef;font-family:'Geist',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+button{font-family:inherit}
+a{color:#ececef}a:hover{color:#ffffff}
+</style>
+</helmet>
+<div style="min-height:100vh;background:radial-gradient(ellipse 80% 40% at 50% -10%, rgba(90,90,130,0.12), transparent 60%), #0b0b0e">
+<div style="max-width:1240px;margin:0 auto;padding:22px 28px 88px">
+
+<nav style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:44px;position:relative;z-index:20">
+  <button onClick="{{ goHome }}" style="display:flex;align-items:center;gap:10px;background:none;border:0;color:#ececef;font-size:14px;font-weight:600;letter-spacing:-0.01em;cursor:pointer;padding:6px 0">
+    <span style="width:22px;height:22px;border-radius:50%;background:conic-gradient(from 220deg, #ee5a36, #e1841a, #2eb37a, #4f8fff, #ee5a36);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.15)"></span>
+    <span>Business Chemistry</span>
+  </button>
+  <sc-if value="{{ hasYou }}" hint-placeholder-val="{{ false }}">
+    <div ref="{{ navRef }}" style="position:relative">
+      <button onClick="{{ toggleNav }}" style="display:flex;align-items:center;gap:12px;padding:7px 12px 7px 14px;border-radius:14px;background:#141418;border:1px solid rgba(255,255,255,0.12);color:#ececef;cursor:pointer" style-hover="background:#1b1b21">
+        <span style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:#8e8e97">You are</span>
+        <span style="display:flex;align-items:center;gap:8px;padding:4px 12px 4px 10px;border-radius:999px;font-family:'Geist Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;background:{{ you.tint }};color:{{ you.hi }};border:1px solid {{ you.line }}">
+          <span style="width:8px;height:8px;border-radius:50%;background:{{ you.color }}"></span>{{ you.name }}
+        </span>
+        <span style="font-size:10px;color:#8e8e97;transition:transform .2s;transform:{{ caretRot }}">▾</span>
+      </button>
+      <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;right:0;top:calc(100% + 8px);width:290px;padding:6px;border-radius:16px;background:#16161b;border:1px solid rgba(255,255,255,0.12);box-shadow:0 24px 48px -16px rgba(0,0,0,0.8);display:flex;flex-direction:column;gap:2px">
+          <div style="padding:10px 12px 6px;font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:#7a7a84">Switch your style</div>
+          <sc-for list="{{ menu }}" as="m" hint-placeholder-count="4">
+            <button onClick="{{ m.onClick }}" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:11px;border:0;text-align:left;color:#ececef;cursor:pointer;background:{{ m.bg }}" style-hover="background:rgba(255,255,255,0.05)">
+              <span style="width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#0b0b0e;background:{{ m.color }}">{{ m.initial }}</span>
+              <span style="display:flex;flex-direction:column;gap:2px;flex:1">
+                <span style="font-size:14px;font-weight:500">{{ m.name }}</span>
+                <span style="font-size:12px;color:#8e8e97">{{ m.tagline }}</span>
+              </span>
+              <span style="font-size:13px;opacity:{{ m.check }}">✓</span>
+            </button>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+  </sc-if>
+</nav>
+
+<sc-if value="{{ isPick }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="01 Pick style">
+    <h1 style="font-size:clamp(40px,6vw,68px);line-height:1;letter-spacing:-0.04em;font-weight:600;margin-bottom:20px;text-wrap:balance">Which style sounds like you?</h1>
+  <p style="font-size:17px;line-height:1.5;color:#8e8e97;max-width:540px;margin-bottom:48px;text-wrap:pretty">Pick the one that fits you best, and we'll show you how to work with everyone else.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:16px">
+    <sc-for list="{{ pickCards }}" as="c" hint-placeholder-count="4">
+      <button onClick="{{ c.onClick }}" style="min-height:320px;display:flex;flex-direction:column;justify-content:space-between;gap:28px;text-align:left;padding:24px;border-radius:20px;background:{{ c.bg }};border:1px solid {{ c.border }};color:#ececef;cursor:pointer;transition:transform .3s cubic-bezier(.2,.7,.2,1), border-color .3s" style-hover="transform:translateY(-4px)">
+        <span style="display:flex;justify-content:space-between;align-items:flex-start">
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.06em;color:#8e8e97">{{ c.num }}</span>
+          <span style="width:52px;height:52px;border-radius:50%;background:{{ c.color }};box-shadow:0 0 0 8px {{ c.tint }}"></span>
+        </span>
+        <span style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:30px;font-weight:600;letter-spacing:-0.025em;line-height:1">{{ c.name }}</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:{{ c.hi }}">{{ c.tagline }}</span>
+          <span style="font-size:14px;line-height:1.5;color:#b4b4bc;text-wrap:pretty">{{ c.desc }}</span>
+        </span>
+      </button>
+    </sc-for>
+  </div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isOnboard }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="01b About you">
+  <button onClick="{{ goHome }}" style="display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 12px;margin-bottom:28px;border-radius:999px;background:#141418;border:1px solid rgba(255,255,255,0.08);color:#8e8e97;font-family:'Geist Mono',monospace;font-size:12px;cursor:pointer" style-hover="color:#ececef">← Change style</button>
+  <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+    <div style="flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:18px">
+      <span style="align-self:flex-start;display:flex;align-items:center;gap:8px;padding:5px 12px 5px 10px;border-radius:999px;font-family:'Geist Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;background:{{ you.tint }};color:{{ you.hi }};border:1px solid {{ you.line }}"><span style="width:8px;height:8px;border-radius:50%;background:{{ you.color }}"></span>{{ you.name }}</span>
+      <h1 style="font-size:clamp(36px,5vw,56px);line-height:1.02;letter-spacing:-0.04em;font-weight:600;text-wrap:balance">Tell your team who you are.</h1>
+      <p style="font-size:16px;line-height:1.5;color:#8e8e97;max-width:440px;text-wrap:pretty">Teammates see this on your profile, next to your chemistry style.</p>
+    </div>
+    <div style="flex:1 1 440px;min-width:0;padding:28px;border-radius:20px;background:#141418;border:1px solid rgba(255,255,255,0.07);display:flex;flex-direction:column;gap:20px">
+      <label style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:#8e8e97">Name</span>
+        <input value="{{ form.name }}" onChange="{{ setName }}" placeholder="First and last name" style="width:100%;padding:14px 16px;border-radius:12px;background:#0f0f13;border:1px solid rgba(255,255,255,0.1);color:#ececef;font-family:inherit;font-size:15px;outline:none" style-focus="border-color:rgba(255,255,255,0.3)">
+      </label>
+      <label style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:#8e8e97">Division</span>
+        <input value="{{ form.division }}" onChange="{{ setDivision }}" placeholder="e.g. Product Design" style="width:100%;padding:14px 16px;border-radius:12px;background:#0f0f13;border:1px solid rgba(255,255,255,0.1);color:#ececef;font-family:inherit;font-size:15px;outline:none" style-focus="border-color:rgba(255,255,255,0.3)">
+      </label>
+      <label style="display:flex;flex-direction:column;gap:8px">
+        <span style="display:flex;justify-content:space-between;gap:12px"><span style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:#8e8e97">About you</span><span style="font-family:'Geist Mono',monospace;font-size:11px;color:#7a7a84">{{ aboutCount }}</span></span>
+        <textarea value="{{ form.about }}" onChange="{{ setAbout }}" maxLength="220" rows="4" placeholder="{{ aboutHint }}" style="width:100%;padding:14px 16px;border-radius:12px;background:#0f0f13;border:1px solid rgba(255,255,255,0.1);color:#ececef;font-family:inherit;font-size:15px;outline:none;resize:none;line-height:1.5" style-focus="border-color:rgba(255,255,255,0.3)"></textarea>
+        <span style="font-size:12.5px;color:#7a7a84">1–2 sentences on how your style shows up at work.</span>
+      </label>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+          <span style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:#8e8e97">Draw your style</span>
+          <button onClick="{{ clearOb }}" style="padding:4px 10px;border-radius:999px;background:transparent;border:1px solid rgba(255,255,255,0.12);color:#c7c7cc;font-size:12px;font-weight:500;cursor:pointer" style-hover="background:rgba(255,255,255,0.05)">Clear</button>
+        </span>
+        <div style="position:relative;height:220px;border-radius:12px;overflow:hidden;background-color:#f4f3ef;background-image:radial-gradient(rgba(0,0,0,0.13) 1px, transparent 1.2px);background-size:20px 20px">
+          <sc-if value="{{ obEmpty }}" hint-placeholder-val="{{ true }}">
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;pointer-events:none;padding:0 24px;text-align:center">
+              <span style="font-size:17px;font-weight:500;color:#8a8a86">Sketch something that feels like a {{ you.name }}.</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;color:#9d9d98">Black marker · draw anywhere</span>
+            </div>
+          </sc-if>
+          <canvas ref="{{ obRef }}" style="position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair"></canvas>
+        </div>
+        <span style="font-size:12.5px;color:#7a7a84">Shows on your profile for teammates.</span>
+      </div>
+      <button onClick="{{ submit }}" style="align-self:flex-start;display:flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;border:0;font-size:14px;font-weight:600;cursor:pointer;background:{{ submitBg }};color:#0b0b0e" style-hover="background:#ffffff">Continue<span>→</span></button>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isLoading }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="01c Loading" style="min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px">
+  {{ spinner }}
+  <span style="font-size:15px;color:#8e8e97">Mapping your chemistry…</span>
+</section>
+</sc-if>
+
+<sc-if value="{{ isDash }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="02 Your chemistry">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:36px">
+    <div style="max-width:760px">
+      <h1 style="font-size:clamp(32px,4.4vw,52px);line-height:1.04;letter-spacing:-0.035em;font-weight:600;text-wrap:balance">{{ you.summary }}</h1>
+      <p style="font-size:16px;line-height:1.5;color:#8e8e97;margin-top:14px;text-wrap:pretty">{{ you.sub }}</p>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:18px;align-items:stretch">
+    <div style="flex:1.7 1 520px;min-width:0;display:flex;flex-direction:column;gap:10px">
+      <sc-for list="{{ pairings }}" as="r" hint-placeholder-count="4">
+        <div onMouseEnter="{{ r.onHover }}" style="flex:1;display:flex;flex-direction:column;gap:16px;padding:20px 22px;border-radius:18px;background:#141418;transition:border-color .2s;border:1px solid {{ r.border }}">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <span style="width:12px;height:12px;border-radius:50%;background:{{ r.color }}"></span>
+              <span style="font-size:19px;font-weight:600;letter-spacing:-0.02em">With {{ r.plural }}</span>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:16px">
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <span style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:#6dd6a4">Do</span>
+              <span style="font-size:15px;line-height:1.4;font-weight:500;text-wrap:pretty">{{ r.do }}</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <span style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:#ff9176">Skip</span>
+              <span style="font-size:15px;line-height:1.4;font-weight:500;text-wrap:pretty">{{ r.skip }}</span>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="display:flex;padding-right:8px">
+                <sc-for list="{{ r.members }}" as="p" hint-placeholder-count="2">
+                  <button onClick="{{ p.onClick }}" title="{{ p.name }}" style="width:32px;height:32px;margin-right:-8px;border-radius:50%;border:2px solid #141418;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#0b0b0e;cursor:pointer;background:{{ p.color }}" style-hover="transform:translateY(-2px)">{{ p.initials }}</button>
+                </sc-for>
+              </div>
+              <span style="font-size:12.5px;color:#8e8e97">{{ r.count }} on your team</span>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="flex:1 1 300px;min-width:0;padding:20px 16px 18px;border-radius:20px;background:#141418;border:1px solid rgba(255,255,255,0.07);display:flex;flex-direction:column">
+      <div style="text-align:center;font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:#7a7a84;margin-bottom:10px">Fast-paced</div>
+      <div style="flex:1;display:grid;grid-template-columns:16px minmax(0,1fr) 16px;gap:8px;align-items:stretch">
+        <div style="writing-mode:vertical-rl;transform:rotate(180deg);text-align:center;font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:#7a7a84">Logic-first</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px;min-height:520px">
+          <sc-for list="{{ quads }}" as="q" hint-placeholder-count="4">
+            <div onMouseEnter="{{ q.onHover }}" style="position:relative;border-radius:14px;overflow:hidden;transition:background .2s, border-color .2s;background:{{ q.bg }};border:1px solid {{ q.border }}">
+              <div style="position:absolute;left:12px;top:12px;right:8px;display:flex;flex-direction:column;gap:3px">
+                <span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;color:{{ q.hi }}">{{ q.name }}</span>
+              </div>
+              <sc-if value="{{ q.isYou }}" hint-placeholder-val="{{ false }}">
+                <span style="position:absolute;left:44%;top:46%;transform:translate(-50%,-50%);width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#0b0b0e;pointer-events:none;background:{{ q.color }};box-shadow:0 0 0 6px {{ q.tint }}, 0 0 0 7px {{ q.line }}">You</span>
+              </sc-if>
+              <sc-for list="{{ q.dots }}" as="d" hint-placeholder-count="0">
+                <button onClick="{{ d.onClick }}" title="{{ d.name }}" style="position:absolute;width:32px;height:32px;margin:-16px 0 0 -16px;border-radius:50%;border:2px solid #141418;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#0b0b0e;cursor:pointer;transition:transform .15s;left:{{ d.left }};top:{{ d.top }};background:{{ d.color }}" style-hover="transform:scale(1.12)">{{ d.initials }}</button>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+        <div style="writing-mode:vertical-rl;text-align:center;font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:#7a7a84">People-first</div>
+      </div>
+      <div style="text-align:center;font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:#7a7a84;margin-top:10px">Measured</div>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="03 Member profile">
+  <button onClick="{{ goDash }}" style="display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 12px;margin-bottom:28px;border-radius:999px;background:#141418;border:1px solid rgba(255,255,255,0.08);color:#8e8e97;font-family:'Geist Mono',monospace;font-size:12px;cursor:pointer" style-hover="color:#ececef">← Your chemistry</button>
+    <div style="display:flex;flex-wrap:wrap;gap:18px;align-items:stretch">
+
+    <div style="flex:1 1 340px;min-width:0;padding:28px;border-radius:20px;background:#141418;border:1px solid rgba(255,255,255,0.07)">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px">
+        <span style="width:56px;height:56px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;color:#0b0b0e;background:{{ them.color }}">{{ mem.initials }}</span>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <span style="font-size:19px;font-weight:600;letter-spacing:-0.015em">{{ mem.first }} <span style="color:#7a7a84;font-weight:400">·</span> {{ them.name }}</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#8e8e97">{{ mem.role }}</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px 14px;align-items:center;padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.06)">
+        <sc-for list="{{ bars }}" as="b" hint-placeholder-count="4">
+          <span style="font-size:13px;color:#c7c7cc">{{ b.name }}</span>
+          <span style="height:6px;border-radius:999px;background:rgba(255,255,255,0.06);overflow:hidden;display:block">
+            <span style="display:block;height:100%;border-radius:999px;width:{{ b.width }};background:{{ b.color }}"></span>
+          </span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#8e8e97;text-align:right;min-width:34px">{{ b.pct }}</span>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:22px">
+        <sc-for list="{{ voice }}" as="v" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-size:14.5px;font-weight:600;letter-spacing:-0.01em">{{ v.title }}</span>
+            <span style="font-size:13.5px;line-height:1.55;color:#8e8e97;text-wrap:pretty">{{ v.body }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="flex:2 1 560px;min-width:0;display:flex;flex-direction:column;gap:18px">
+      <div style="padding:24px;border-radius:20px;background:#141418;border:1px solid rgba(255,255,255,0.07);display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <span style="font-size:17px;font-weight:600;letter-spacing:-0.015em">{{ mem.first }}'s sketch</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;color:#7a7a84">Drawn at onboarding</span>
+        </div>
+        <div style="position:relative;height:440px;border-radius:14px;overflow:hidden;background-color:#f4f3ef;background-image:radial-gradient(rgba(0,0,0,0.13) 1px, transparent 1.2px);background-size:20px 20px;box-shadow:inset 0 0 0 1px rgba(0,0,0,0.06)">
+          <canvas ref="{{ boardRef }}" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></canvas>
+        </div>
+      </div>
+
+      <div style="padding:26px 28px;border-radius:20px;background:#141418;border:1px solid rgba(255,255,255,0.07);display:flex;flex-direction:column;gap:20px">
+        <span style="font-size:17px;font-weight:600;letter-spacing:-0.015em">Build {{ them.name }} skills as a {{ you.name }}</span>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:24px;align-items:center">
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <span style="width:12px;height:12px;border-radius:50%;margin-top:5px;flex-shrink:0;background:{{ you.color }}"></span>
+              <div style="display:flex;flex-direction:column;gap:3px">
+                <span style="font-size:14.5px;font-weight:600">{{ build.yourStrength.title }}</span>
+                <span style="font-size:13.5px;line-height:1.5;color:#8e8e97">{{ build.yourStrength.body }}</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <span style="width:12px;height:12px;border-radius:50%;margin-top:5px;flex-shrink:0;background:{{ you.color }}"></span>
+              <div style="display:flex;flex-direction:column;gap:3px">
+                <span style="font-size:14.5px;font-weight:600">{{ build.theirStrength.title }}</span>
+                <span style="font-size:13.5px;line-height:1.5;color:#8e8e97">{{ build.theirStrength.body }}</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;padding:18px;border-radius:14px;background:{{ them.tint }};border:1px solid {{ them.line }}">
+            <span style="width:12px;height:12px;border-radius:50%;margin-top:5px;flex-shrink:0;background:{{ them.color }}"></span>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font-size:15px;font-weight:600;line-height:1.3">{{ build.result.title }}</span>
+              <span style="font-size:13.5px;line-height:1.5;color:#b4b4bc;text-wrap:pretty">{{ build.result.body }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showFitOnRoster&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Roster&quot;}}">
+const A = {
+  driver: { name:'Driver', plural:'Drivers', color:'#ee5a36', hi:'#ff9176', tint:'rgba(238,90,54,0.13)', line:'rgba(238,90,54,0.38)', tagline:'Quantitative, logical',
+    desc:'Direct and outcome-focused. You move fast, debate openly, and want decisions made.',
+    summary:'You move fast, lead with data, and push for the call.', sub:'Here is how that lands with each style. Tap anyone to open their profile.' },
+  guardian: { name:'Guardian', plural:'Guardians', color:'#4f8fff', hi:'#8eb6ff', tint:'rgba(79,143,255,0.13)', line:'rgba(79,143,255,0.38)', tagline:'Methodical, reserved',
+    desc:'Detail-oriented and evidence-driven. You weigh risk and value getting it right.',
+    summary:'You weigh the evidence, spot the risk, and get it right.', sub:'Here is how that lands with each style. Tap anyone to open their profile.' },
+  pioneer: { name:'Pioneer', plural:'Pioneers', color:'#e1841a', hi:'#ffb95c', tint:'rgba(225,132,26,0.14)', line:'rgba(225,132,26,0.4)', tagline:'Imaginative, spontaneous',
+    desc:'Energetic and comfortable with ambiguity. You see what could be and build momentum.',
+    summary:'You chase possibilities, spark energy, and open new ground.', sub:'Here is how that lands with each style. Tap anyone to open their profile.' },
+  integrator: { name:'Integrator', plural:'Integrators', color:'#2eb37a', hi:'#6dd6a4', tint:'rgba(46,179,122,0.13)', line:'rgba(46,179,122,0.38)', tagline:'Empathic, diplomatic',
+    desc:'Relationship-first. You read the room and hold the team together.',
+    summary:'You read the room, build trust, and hold the team together.', sub:'Here is how that lands with each style. Tap anyone to open their profile.' }
+};
+const KEYS = ['driver','guardian','pioneer','integrator'];
+const QUAD_ORDER = ['driver','pioneer','guardian','integrator'];
+const PACE = { driver:'fast', pioneer:'fast', guardian:'measured', integrator:'measured' };
+const FOCUS = { driver:'logic', guardian:'logic', pioneer:'people', integrator:'people' };
+const FIT = {
+  Mirror: { rank:2, note:'Same style. Easy rhythm, shared blind spots.' },
+  Natural: { rank:0, note:'Same pace. You click quickly.' },
+  Workable: { rank:1, note:'Same focus, different speed.' },
+  Stretch: { rank:3, note:'Opposite corners. Worth the effort.' }
+};
+function fitOf(y, t) {
+  if (y === t) return 'Mirror';
+  if (PACE[y] === PACE[t]) return 'Natural';
+  if (FOCUS[y] === FOCUS[t]) return 'Workable';
+  return 'Stretch';
+}
+const PAIR = {
+  driver: {
+    driver:{ do:'Pick a tiebreaker before you start.', skip:'Turning every call into a contest.' },
+    guardian:{ do:'Lead with the headline, then show the data.', skip:'Pushing for a yes on the spot.' },
+    pioneer:{ do:'Match their energy, then funnel it into one ask.', skip:'Cutting off the riff.' },
+    integrator:{ do:'Open with a real check-in.', skip:'Pitching on logic alone.' } },
+  guardian: {
+    driver:{ do:'Put your answer in the first sentence.', skip:'Burying the point in caveats.' },
+    guardian:{ do:'Agree on a "good enough" bar together.', skip:'Waiting for perfect data.' },
+    pioneer:{ do:'Let the idea form before you judge it.', skip:'Asking for a plan mid-sentence.' },
+    integrator:{ do:'Share your reasoning, not just the output.', skip:'Staying all business.' } },
+  pioneer: {
+    driver:{ do:'Bring one ask and the number behind it.', skip:'Pitching the whole brainstorm.' },
+    guardian:{ do:'Frame the problem before the leap.', skip:'Changing the idea every week.' },
+    pioneer:{ do:'Pick a north star, then brainstorm.', skip:'Chasing every shiny thing.' },
+    integrator:{ do:'Check in before you pitch.', skip:'Skipping the people part.' } },
+  integrator: {
+    driver:{ do:'Make the ask in your first line.', skip:'Softening the hard read.' },
+    guardian:{ do:'Offer clear options and time to think.', skip:'Keeping scope vague.' },
+    pioneer:{ do:'Match their energy, then help them land it.', skip:'Being the polite no.' },
+    integrator:{ do:'Take turns making the call.', skip:'Trading honesty for harmony.' } }
+};
+const ROLES = { alex:'Engineering Lead', sam:'QA Lead', jordan:'Product Designer', taylor:'Program Manager', morgan:'Product Manager',
+  casey:'Data Analyst', riley:'UX Researcher', avery:'Design Ops', drew:'Security Engineer', quinn:'Content Strategist' };
+const SLOTS = [{ l:'24%', t:'66%' }, { l:'74%', t:'74%' }, { l:'78%', t:'40%' }];
+const INK = '#1b1b1f';
+const SLOTS_T = [{ l:'26%', t:'70%' }, { l:'72%', t:'82%' }, { l:'76%', t:'52%' }];
+const BIO = {
+  alex:'I set the target and the tempo. Bring me a number and a recommendation and we will get along fine.',
+  sam:'I test what others assume. If I ask a lot of questions, it means I care about the launch going well.',
+  jordan:'I sketch ten versions before I pick one. Give me room to explore early and I will give you a sharper answer later.',
+  taylor:'I keep programs moving by keeping people aligned. I notice when someone has gone quiet, and I check in.',
+  morgan:'I own the roadmap, and I make calls. I would rather decide with 70% of the data than wait for 100%.',
+  casey:'Numbers are how I build trust. Show me the source and I will help you tell the story behind it.',
+  riley:'I chase the insight nobody expected. I love a messy interview and a whiteboard full of sticky notes.',
+  avery:'I build the systems that let the team do its best work. I care that everyone has what they need.',
+  drew:'I plan for the worst case so the team does not have to. Loop me in early and nothing surprises us.',
+  quinn:'Words are my playground. I pitch bold ideas fast, then love it when someone helps me land one.'
+};
+const SAMPLE_ABOUT = { driver:'e.g. I move fast and like a clear goal. Tell me the target and I will find the shortest path.',
+  guardian:'e.g. I like to understand the details before I commit. Give me the facts and time to review.',
+  pioneer:'e.g. I get energy from new ideas. I think out loud, so let me riff before we narrow down.',
+  integrator:'e.g. I pay attention to how the team feels. I work best when everyone has a voice.' };
+
+class Component extends DCLogic {
+  state = { screen:'pick', you:null, memberId:null, navOpen:false, view:null, showTeam:null, selQuad:null,
+    filter:'all', tool:'marker', color:0, boardEmpty:true, obEmpty:true, ready: !!window.CHEM,
+    form: { name:'', division:'', about:'' } };
+
+  componentDidMount() {
+    if (!window.CHEM) this.poll = setInterval(() => { if (window.CHEM) { clearInterval(this.poll); this.setState({ ready:true }); } }, 50);
+    this.onDoc = (e) => { if (this.state.navOpen && this.navEl && !this.navEl.contains(e.target)) this.setState({ navOpen:false }); };
+    this.onKey = (e) => { if (e.key === 'Escape' && this.state.navOpen) this.setState({ navOpen:false }); };
+    document.addEventListener('mousedown', this.onDoc);
+    document.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() {
+    clearInterval(this.poll); clearTimeout(this.loadT);
+    document.removeEventListener('mousedown', this.onDoc);
+    document.removeEventListener('keydown', this.onKey);
+    Object.values(this.boards).forEach(bd => bd.ro && bd.ro.disconnect());
+  }
+
+  navRef = (el) => { this.navEl = el; };
+
+  boards = {};
+  boardRef = (el) => this.attach('pf', el);
+  obRef = (el) => this.attach('ob', el);
+
+  attach(key, el) {
+    const cur = this.boards[key];
+    if (cur && cur.el === el) return;
+    if (cur && cur.ro) cur.ro.disconnect();
+    if (!el) { delete this.boards[key]; return; }
+    const ctx = el.getContext('2d');
+    const fit = () => {
+      const r = el.getBoundingClientRect();
+      const d = window.devicePixelRatio || 1;
+      const w = Math.round(r.width * d), h = Math.round(r.height * d);
+      if (!w || !h || (el.width === w && el.height === h)) return;
+      let snap = null;
+      if (el.width && el.height) {
+        snap = document.createElement('canvas'); snap.width = el.width; snap.height = el.height;
+        snap.getContext('2d').drawImage(el, 0, 0);
+      }
+      el.width = w; el.height = h;
+      ctx.setTransform(d, 0, 0, d, 0, 0);
+      if (snap) ctx.drawImage(snap, 0, 0, snap.width / d, snap.height / d);
+    };
+    fit();
+    const ro = new ResizeObserver(() => { fit(); if (key === 'pf') this.drawCat(); }); ro.observe(el);
+    this.boards[key] = { el, ctx, ro };
+    if (key === 'pf') { this.drawCat(); return; }
+    let drawing = false, last = null;
+    const pt = (e) => { const r = el.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+    el.onpointerdown = (e) => {
+      drawing = true; el.setPointerCapture(e.pointerId); last = pt(e); this.stroke(key, last, last);
+      if (key === 'pf' && this.state.boardEmpty && this.state.tool === 'marker') this.setState({ boardEmpty:false });
+      if (key === 'ob' && this.state.obEmpty) this.setState({ obEmpty:false });
+    };
+    el.onpointermove = (e) => { if (!drawing) return; const p = pt(e); this.stroke(key, last, p); last = p; };
+    el.onpointerup = el.onpointercancel = () => { drawing = false; };
+  }
+
+  stroke(key, a, b) {
+    const bd = this.boards[key]; if (!bd) return;
+    const c = bd.ctx;
+    const er = key === 'pf' && this.state.tool === 'eraser';
+    c.globalCompositeOperation = er ? 'destination-out' : 'source-over';
+    c.strokeStyle = key === 'ob' ? INK : ((this.inkList && this.inkList[this.state.color]) || INK);
+    c.lineWidth = er ? 28 : 3.5;
+    c.lineCap = 'round'; c.lineJoin = 'round';
+    c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x + 0.01, b.y); c.stroke();
+  }
+
+  componentDidUpdate(pp, ps) { if (ps.memberId !== this.state.memberId || ps.screen !== this.state.screen) this.drawCat(); }
+
+  drawCat() {
+    const bd = this.boards.pf; if (!bd) return;
+    const m = window.CHEM && window.CHEM.TEAM.find(x => x.id === this.state.memberId); if (!m) return;
+    const el = bd.el, c = bd.ctx, d = window.devicePixelRatio || 1;
+    const W = el.width / d, H = el.height / d;
+    c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, el.width, el.height); c.restore();
+    let seed = m.varSeed * 9301 + 49297;
+    const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed % 10000) / 10000; };
+    const s = Math.min(W, H) / 330, cx = W / 2 + (rnd() - 0.5) * 60 * s, cy = H / 2 + 22 * s;
+    const P = (x, y) => [cx + x * s, cy + y * s];
+    const j = (v) => v + (rnd() - 0.5) * 3.2;
+    c.globalCompositeOperation = 'source-over'; c.strokeStyle = '#1b1b1f'; c.lineCap = 'round'; c.lineJoin = 'round';
+    const line = (pts, passes = 2, w = 3) => {
+      for (let p = 0; p < passes; p++) {
+        c.lineWidth = w * (p ? 0.7 : 1);
+        c.beginPath();
+        pts.forEach(([x, y], i) => { const X = j(x), Y = j(y); i ? c.lineTo(X, Y) : c.moveTo(X, Y); });
+        c.stroke();
+      }
+    };
+    const ell = (x, y, rx, ry, a0 = 0, a1 = Math.PI * 2, n = 36) => {
+      const pts = []; for (let i = 0; i <= n; i++) { const t = a0 + (a1 - a0) * i / n; pts.push(P(x + Math.cos(t) * rx * (1 + (rnd() - 0.5) * 0.04), y + Math.sin(t) * ry * (1 + (rnd() - 0.5) * 0.04))); }
+      return pts;
+    };
+    const tilt = (rnd() - 0.5) * 20, sleepy = rnd() > 0.6, stripes = Math.floor(rnd() * 4);
+    line(ell(0, -10, 100, 82));
+    // ears
+    line([P(-78, -58), P(-72 + tilt * 0.3, -140 - tilt), P(-28, -86)]);
+    line([P(78, -58), P(72 + tilt * 0.3, -140 + tilt), P(28, -86)]);
+    line([P(-66, -70), P(-64, -116), P(-42, -88)], 1, 2); line([P(66, -70), P(64, -116), P(42, -88)], 1, 2);
+    // eyes
+    if (sleepy) { line(ell(-36, -20, 14, 8, 0.1, Math.PI - 0.1, 12)); line(ell(36, -20, 14, 8, 0.1, Math.PI - 0.1, 12)); }
+    else {
+      line(ell(-36, -22, 13, 15, 0, Math.PI * 2, 20)); line(ell(36, -22, 13, 15, 0, Math.PI * 2, 20));
+      c.fillStyle = '#1b1b1f'; [[-33, -19], [39, -19]].forEach(([x, y]) => { c.beginPath(); c.arc(...P(x, y), 5.5 * s, 0, Math.PI * 2); c.fill(); });
+    }
+    // nose + mouth
+    line([P(-8, 8), P(8, 8), P(0, 17), P(-8, 8)], 2, 2.6);
+    line([P(0, 17), P(0, 24)], 1, 2.6);
+    line(ell(-10, 24, 10, 9, 0, Math.PI, 10), 1, 2.6); line(ell(10, 24, 10, 9, 0, Math.PI, 10), 1, 2.6);
+    // whiskers
+    [[-1], [1]].forEach(([d2]) => { [-6, 6, 17].forEach((dy, i) => line([P(d2 * 40, 12 + dy * 0.5), P(d2 * (118 + i * 6), dy * 1.3)], 1, 2)); });
+    // forehead stripes
+    for (let i = 0; i < stripes; i++) { const x = (i - (stripes - 1) / 2) * 16; line([P(x, -84), P(x * 0.9, -62)], 1, 2.4); }
+  }
+
+  wipe(key) {
+    const bd = this.boards[key || 'pf']; if (!bd) return;
+    const c = bd.ctx;
+    c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, bd.el.width, bd.el.height); c.restore();
+  }
+
+  go(screen, extra) { this.setState({ screen, navOpen:false, ...(extra || {}) }); window.scrollTo(0, 0); }
+  setForm(k, v) { this.setState(s => ({ form: { ...s.form, [k]: v } })); }
+  submit() {
+    this.go('loading');
+    clearTimeout(this.loadT);
+    this.loadT = setTimeout(() => this.go('dash'), 1600);
+  }
+  openMember(id) { this.go('profile', { memberId:id, boardEmpty:true, tool:'marker', color:0 }); }
+
+  renderVals() {
+    const C = window.CHEM;
+    const s = this.state;
+    const view = s.view || this.props.defaultView || 'map';
+    const showTeam = s.showTeam ?? (this.props.teamPlottedByDefault ?? true);
+    const showFit = this.props.showFitOnRoster ?? true;
+    const ya = s.you ? { key:s.you, ...A[s.you] } : null;
+    const team = C ? C.TEAM.map(m => ({ ...m, role: ROLES[m.id] })) : [];
+    const person = (m) => ({ name:m.name, initials:m.initials, role:m.role, color:A[m.archetype].color,
+      onClick:(e) => { if (e && e.stopPropagation) e.stopPropagation(); this.openMember(m.id); } });
+
+    const pickCards = KEYS.map((k, i) => ({ ...A[k], num:'0' + (i + 1),
+      bg: s.you === k ? '#18181d' : '#141418',
+      border: s.you === k ? A[k].line : 'rgba(255,255,255,0.07)',
+      onClick: () => this.go('onboard', { you:k, selQuad:null, filter:'all' }) }));
+
+    const menu = KEYS.map(k => ({ name:A[k].name, tagline:A[k].tagline, color:A[k].color, initial:A[k].name[0],
+      bg: s.you === k ? 'rgba(255,255,255,0.06)' : 'transparent', check: s.you === k ? 1 : 0,
+      onClick: () => { this.setState({ you:k, navOpen:false, selQuad:null }); if (s.screen === 'pick') this.go('onboard', { you:k }); } }));
+
+    const pairOf = (t) => {
+      const f = fitOf(s.you, t);
+      const members = team.filter(m => m.archetype === t).map(person);
+      return { key:t, plural:A[t].plural, color:A[t].color, fit:f, fitNote:FIT[f].note,
+        do: PAIR[s.you][t].do, skip: PAIR[s.you][t].skip, members, count: members.length,
+        peopleLabel: (t === s.you ? 'Fellow ' + A[t].plural : A[t].plural) + ' on ' + ((s.form.division || '').trim() || 'Product Design') };
+    };
+
+    let pairings = [], quads = [], sel = {};
+    if (ya) {
+      const selKey = s.selQuad;
+      pairings = KEYS.map(pairOf).sort((a, b) => FIT[a.fit].rank - FIT[b.fit].rank).map(p => ({ ...p,
+        border: selKey === p.key ? A[p.key].line : 'rgba(255,255,255,0.07)',
+        onHover: () => this.setState({ selQuad:p.key }) }));
+      quads = QUAD_ORDER.map(k => {
+        const f = fitOf(s.you, k), on = selKey === k;
+        const ms = team.filter(m => m.archetype === k);
+        return { key:k, name:A[k].plural, color:A[k].color, hi:A[k].hi, tint:A[k].tint, line:A[k].line,
+          isYou: k === s.you,
+          bg: on ? A[k].tint : 'rgba(255,255,255,0.025)',
+          border: on ? A[k].line : 'rgba(255,255,255,0.06)',
+          dots: ms.map((m, i) => ({ ...person(m), left:SLOTS_T[i % 3].l, top:SLOTS_T[i % 3].t })),
+          onHover: () => this.setState({ selQuad:k }) };
+      });
+    }
+
+    const counts = {}; team.forEach(m => { counts[m.archetype] = (counts[m.archetype] || 0) + 1; });
+    const chips = ['all', ...KEYS].map(k => {
+      const on = s.filter === k;
+      return { label: k === 'all' ? 'Everyone' : A[k].plural, count: k === 'all' ? team.length : counts[k] || 0,
+        color: k === 'all' ? '#8e8e97' : A[k].color,
+        bg: on ? '#ececef' : '#141418', fg: on ? '#0b0b0e' : '#c7c7cc', border: on ? '#ececef' : 'rgba(255,255,255,0.08)',
+        onClick: () => this.setState({ filter:k }) };
+    });
+    const roster = team.filter(m => s.filter === 'all' || m.archetype === s.filter).map(m => ({ ...person(m),
+      arch:A[m.archetype].name, tint:A[m.archetype].tint, hi:A[m.archetype].hi,
+      fit: ya ? fitOf(s.you, m.archetype) : '' }));
+
+    let mem = {}, them = {}, bars = [], voice = [], build = { yourStrength:{}, theirStrength:{}, result:{} }, inks = [];
+    const m = team.find(x => x.id === s.memberId);
+    if (C && m && ya) {
+      mem = { ...m };
+      them = { key:m.archetype, ...A[m.archetype] };
+      const base = C.BASE_SCORES[m.archetype];
+      const sc = {};
+      KEYS.forEach((k, i) => { sc[k] = Math.max(15, Math.min(85, base[k] + ((m.varSeed * 7 + i * 13) % 11) - 5)); });
+      bars = [m.archetype, ...KEYS.filter(k => k !== m.archetype).sort((a, b) => sc[b] - sc[a])]
+        .map(k => ({ name:A[k].name, width: sc[k] + '%', pct: sc[k] + '%', color:A[k].color }));
+      const V = C.VOICE[m.archetype];
+      voice = [{ title:'In my words', body: BIO[m.id] }, V.sections[1], V.sections[2], { title:V.pairTitle, body:V.pairBody[s.you] }];
+      build = C.BUILD[s.you][m.archetype];
+      const list = [{ c:INK, label:'Ink' }, { c:ya.color, label:ya.name }];
+      if (them.key !== ya.key) list.push({ c:them.color, label:them.name });
+      this.inkList = list.map(x => x.c);
+      inks = list.map((x, i) => ({ color:x.c, label:x.label,
+        ring: s.tool === 'marker' && s.color === i ? '0 0 0 2px #ffffff, 0 0 0 4px ' + x.c : '0 0 0 1px rgba(0,0,0,0.12)',
+        onClick: () => this.setState({ color:i, tool:'marker' }) }));
+    }
+
+    return {
+      hasYou: !!ya, you: ya || {}, navOpen: s.navOpen, caretRot: s.navOpen ? 'rotate(180deg)' : 'none', menu,
+      toggleNav: () => this.setState({ navOpen: !s.navOpen }),
+      navRef: this.navRef,
+      goHome: () => this.go('pick'),
+      goDash: () => this.go('dash'),
+      obRef: this.obRef, obEmpty: s.obEmpty,
+      clearOb: () => { this.wipe('ob'); this.setState({ obEmpty:true }); },
+      isPick: s.screen === 'pick' || !ya,
+      isOnboard: ya && s.screen === 'onboard',
+      isLoading: ya && s.screen === 'loading',
+      division: (s.form.division || '').trim() || 'Product Design',
+      form: s.form,
+      setName: (e) => this.setForm('name', e.target.value),
+      setDivision: (e) => this.setForm('division', e.target.value),
+      setAbout: (e) => this.setForm('about', e.target.value),
+      aboutCount: (s.form.about || '').length + ' / 220',
+      aboutHint: ya ? SAMPLE_ABOUT[ya.key] : '',
+      submitBg: '#ececef',
+      submit: () => this.submit(),
+      spinner: React.createElement('span', { style: { width:44, height:44, borderRadius:'50%', border:'3px solid rgba(255,255,255,0.1)', borderTopColor: ya ? ya.color : '#ececef', animation:'bcspin .8s linear infinite', display:'block' } }),
+      isDash: ya && s.screen === 'dash',
+      isProfile: ya && s.screen === 'profile' && !!m && !!C,
+      pickCards,
+      isMap: view === 'map', isList: view === 'pairings',
+      setMap: () => this.setState({ view:'map' }), setList: () => this.setState({ view:'pairings' }),
+      mapBg: view === 'map' ? '#ececef' : 'transparent', mapFg: view === 'map' ? '#0b0b0e' : '#8e8e97',
+      listBg: view === 'pairings' ? '#ececef' : 'transparent', listFg: view === 'pairings' ? '#0b0b0e' : '#8e8e97',
+      showTeam, hideTeam: !showTeam,
+      toggleShowTeam: () => this.setState({ showTeam: !showTeam }),
+      switchBg: showTeam ? (ya ? ya.color : '#2eb37a') : 'rgba(255,255,255,0.14)',
+      knobX: showTeam ? 'translateX(14px)' : 'none',
+      pairings, quads, sel,
+      chips, roster, showFit,
+      mem, them, bars, voice, build, inks,
+      boardRef: this.boardRef, boardEmpty: s.boardEmpty,
+      cursor: s.tool === 'eraser' ? 'cell' : 'crosshair',
+      pickMarker: () => this.setState({ tool:'marker' }),
+      pickEraser: () => this.setState({ tool:'eraser' }),
+      markerBg: s.tool === 'marker' ? '#1b1b1f' : 'transparent', markerFg: s.tool === 'marker' ? '#ffffff' : '#1b1b1f',
+      eraserBg: s.tool === 'eraser' ? '#1b1b1f' : 'transparent', eraserFg: s.tool === 'eraser' ? '#ffffff' : '#1b1b1f',
+      clearBoard: () => { this.wipe(); this.setState({ boardEmpty:true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

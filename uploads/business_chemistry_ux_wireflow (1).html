@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Chemistry UX Wireflow</title>
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f7f7f5;
+    --bg-tertiary: #ededea;
+    --text-primary: #1a1a1a;
+    --text-secondary: #6b6b6b;
+    --text-tertiary: #9b9b9b;
+    --border-tertiary: rgba(0,0,0,0.12);
+    --border-secondary: rgba(0,0,0,0.2);
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --dr: #D85A30; --dr-bg: #FAECE7; --dr-border: #F0997B; --dr-text: #993C1D;
+    --gu: #378ADD; --gu-bg: #E6F1FB; --gu-border: #85B7EB; --gu-text: #185FA5;
+    --pi: #BA7517; --pi-bg: #FAEEDA; --pi-border: #FAC775; --pi-text: #854F0B;
+    --in: #1D9E75; --in-bg: #E1F5EE; --in-border: #5DCAA5; --in-text: #0F6E56;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg-primary: #1a1a1a;
+      --bg-secondary: #2a2a28;
+      --bg-tertiary: #333331;
+      --text-primary: #e8e6df;
+      --text-secondary: #9c9a92;
+      --text-tertiary: #73726c;
+      --border-tertiary: rgba(255,255,255,0.12);
+      --border-secondary: rgba(255,255,255,0.2);
+    }
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: var(--font-sans); background: var(--bg-primary); color: var(--text-primary); padding: 16px; max-width: 1000px; margin: 0 auto; }
+
+  .step { margin-bottom: 8px; }
+  .step-label { font-size: 10px; font-weight: 500; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; padding-left: 4px; }
+
+  .screen { background: var(--bg-secondary); border: 1px solid var(--border-tertiary); border-radius: 10px; overflow: visible; box-shadow: 0 1px 3px rgba(0,0,0,.06); position: relative; }
+  .screen-body { padding: 10px 12px; font-size: 11px; color: var(--text-secondary); line-height: 1.5; }
+  .screen-title { font-size: 12px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+
+  .btn-pill { padding: 2px 7px; border-radius: 4px; font-size: 9px; font-weight: 500; border: 1px solid; display: inline-block; }
+  .c-dr { background: var(--dr-bg); color: var(--dr-text); border-color: var(--dr-border); }
+  .c-gu { background: var(--gu-bg); color: var(--gu-text); border-color: var(--gu-border); }
+  .c-pi { background: var(--pi-bg); color: var(--pi-text); border-color: var(--pi-border); }
+  .c-in { background: var(--in-bg); color: var(--in-text); border-color: var(--in-border); }
+  .cond-badge { position: absolute; top: -8px; right: 8px; padding: 1px 6px; border-radius: 8px; font-size: 8px; font-weight: 500; z-index: 2; }
+
+  .fan-out { display: flex; flex-direction: column; align-items: center; padding: 4px 0; }
+  .fan-out .stem { width: 2px; height: 16px; background: var(--border-secondary); }
+  .fan-out .branch-bar { height: 2px; background: var(--border-secondary); width: calc(100% - 40px); max-width: 800px; }
+  .fan-out .drops { display: flex; justify-content: space-between; width: calc(100% - 40px); max-width: 800px; }
+  .fan-out .drop { display: flex; flex-direction: column; align-items: center; }
+  .fan-out .drop .line { width: 2px; height: 14px; position: relative; }
+  .fan-out .drop .line::after { content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); border-left: 4px solid transparent; border-right: 4px solid transparent; }
+  .fan-out .drop:nth-child(1) .line { background: var(--dr); }
+  .fan-out .drop:nth-child(1) .line::after { border-top: 5px solid var(--dr); }
+  .fan-out .drop:nth-child(2) .line { background: var(--gu); }
+  .fan-out .drop:nth-child(2) .line::after { border-top: 5px solid var(--gu); }
+  .fan-out .drop:nth-child(3) .line { background: var(--pi); }
+  .fan-out .drop:nth-child(3) .line::after { border-top: 5px solid var(--pi); }
+  .fan-out .drop:nth-child(4) .line { background: var(--in); }
+  .fan-out .drop:nth-child(4) .line::after { border-top: 5px solid var(--in); }
+  .fan-out .drop .tag { font-size: 8px; font-weight: 500; padding: 1px 6px; border-radius: 6px; margin-bottom: 4px; }
+
+  .converge { display: flex; flex-direction: column; align-items: center; padding: 4px 0; }
+  .converge .drops-up { display: flex; justify-content: space-between; width: calc(100% - 40px); max-width: 800px; }
+  .converge .drop-up { width: 2px; height: 14px; }
+  .converge .drop-up:nth-child(1) { background: var(--dr); opacity:.5; }
+  .converge .drop-up:nth-child(2) { background: var(--gu); opacity:.5; }
+  .converge .drop-up:nth-child(3) { background: var(--pi); opacity:.5; }
+  .converge .drop-up:nth-child(4) { background: var(--in); opacity:.5; }
+  .converge .branch-bar { height: 2px; background: var(--border-secondary); width: calc(100% - 40px); max-width: 800px; opacity:.5; }
+  .converge .stem { width: 2px; height: 14px; background: var(--border-secondary); position: relative; }
+  .converge .stem::after { content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 5px solid var(--border-secondary); }
+  .converge-label { text-align: center; font-size: 9px; color: var(--text-tertiary); padding: 2px 0 6px; }
+
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .grid-center { display: flex; justify-content: center; }
+
+  @media (max-width: 840px) {
+    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .fan-out .branch-bar, .converge .branch-bar { display: none; }
+    .fan-out .drops, .converge .drops-up { flex-wrap: wrap; justify-content: space-around; gap: 8px; }
+  }
+  @media (max-width: 480px) {
+    .grid-4 { grid-template-columns: 1fr; }
+    body { padding: 10px; }
+    .screen-body { padding: 8px 10px; }
+  }
+
+  .placeholder { height: 10px; border-radius: 3px; background: var(--bg-tertiary); margin: 3px 0; }
+  .placeholder.w80{width:80%}.placeholder.w100{width:100%}
+
+  .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  @media (max-width: 400px) { .team-grid { grid-template-columns: 1fr; } }
+  .member-row { display: flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 5px; font-size: 10px; border: 1px solid; }
+  .member-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  .profile-section { margin: 4px 0; }
+  .profile-section-title { font-size: 8px; font-weight: 500; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 2px; }
+  .interaction-tip { padding: 4px 6px; border-radius: 4px; font-size: 9px; margin: 2px 0; border-left: 2px solid; }
+
+  .ellipsis { text-align: center; padding: 8px 0; color: var(--text-tertiary); font-size: 18px; letter-spacing: 4px; }
+  .ellipsis-note { text-align: center; font-size: 10px; color: var(--text-tertiary); padding-bottom: 8px; }
+
+  .matrix-screen { border-style: dashed; max-width: 420px; margin: 0 auto; }
+  .matrix-screen table { width: 100%; border-collapse: collapse; font-size: 9px; text-align: center; }
+  .matrix-screen td { padding: 4px; }
+  @media (max-width: 480px) { .matrix-screen table { font-size: 7px; } .matrix-screen td { padding: 2px; } }
+
+  .flow-label { text-align: center; padding: 4px 0; font-size: 10px; color: var(--text-secondary); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<!-- STEP 1 -->
+<div class="step">
+  <div class="step-label">Step 1 — Select your style</div>
+  <div class="grid-center">
+    <div class="screen" style="width:100%;max-width:320px">
+      <div class="screen-body">
+        <div class="screen-title" style="text-align:center">What's your style?</div>
+        <div style="font-size:9px;text-align:center;color:var(--text-tertiary);margin-bottom:6px">Select your Business Chemistry archetype</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+          <div style="padding:8px;border-radius:6px;text-align:center;background:var(--dr-bg);border:1px solid var(--dr-border)">
+            <div style="font-size:11px;font-weight:500;color:var(--dr-text)">Driver</div>
+            <div style="font-size:8px;color:var(--dr-text);opacity:.7">Quantitative, logical</div>
+          </div>
+          <div style="padding:8px;border-radius:6px;text-align:center;background:var(--gu-bg);border:1px solid var(--gu-border)">
+            <div style="font-size:11px;font-weight:500;color:var(--gu-text)">Guardian</div>
+            <div style="font-size:8px;color:var(--gu-text);opacity:.7">Methodical, reserved</div>
+          </div>
+          <div style="padding:8px;border-radius:6px;text-align:center;background:var(--pi-bg);border:1px solid var(--pi-border)">
+            <div style="font-size:11px;font-weight:500;color:var(--pi-text)">Pioneer</div>
+            <div style="font-size:8px;color:var(--pi-text);opacity:.7">Imaginative, spontaneous</div>
+          </div>
+          <div style="padding:8px;border-radius:6px;text-align:center;background:var(--in-bg);border:1px solid var(--in-border)">
+            <div style="font-size:11px;font-weight:500;color:var(--in-text)">Integrator</div>
+            <div style="font-size:8px;color:var(--in-text);opacity:.7">Empathic, diplomatic</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fan-out -->
+<div class="fan-out">
+  <div class="stem"></div>
+  <div class="branch-bar"></div>
+  <div class="drops">
+    <div class="drop"><div class="tag btn-pill c-dr">if Driver</div><div class="line"></div></div>
+    <div class="drop"><div class="tag btn-pill c-gu">if Guardian</div><div class="line"></div></div>
+    <div class="drop"><div class="tag btn-pill c-pi">if Pioneer</div><div class="line"></div></div>
+    <div class="drop"><div class="tag btn-pill c-in">if Integrator</div><div class="line"></div></div>
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="step">
+  <div class="step-label">Step 2 — Conditional dashboard</div>
+  <div class="grid-4">
+    <div class="screen" style="margin-top:6px">
+      <div class="cond-badge c-dr">Driver view</div>
+      <div class="screen-body">
+        <div class="screen-title">Your dashboard</div>
+        <div style="font-size:9px;color:var(--text-tertiary);margin-bottom:4px">How to work with others as a Driver</div>
+        <div style="padding:4px 6px;border-radius:4px;background:var(--dr-bg);margin:3px 0;font-size:9px;color:var(--dr-text);border-left:2px solid var(--dr)">→ With Guardians: slow down, give detail</div>
+        <div style="padding:4px 6px;border-radius:4px;background:var(--dr-bg);margin:3px 0;font-size:9px;color:var(--dr-text);border-left:2px solid var(--dr)">→ With Pioneers: match energy, stay open</div>
+        <div style="padding:4px 6px;border-radius:4px;background:var(--dr-bg);margin:3px 0;font-size:9px;color:var(--dr-text);border-left:2px solid var(--dr)">→ With Integrators: show empathy first</div>
+        <div class="placeholder w80"></div>
+        <div style="margin-top:6px;padding:4px 8px;border-radius:4px;background:var(--bg-tertiary);font-size:9px;font-weight:500;text-align:center;color:var(--text-secondary)">View team →</div>
+      </div>
+    </div>
+    <div class="screen" style="margin-top:6px">
+      <div class="cond-badge c-gu">Guardian view</div>
+      <div class="screen-body">
+        <div class="screen-title">Your dashboard</div>
+        <div style="font-size:9px;color:var(--text-tertiary);margin-bottom:4px">How to work with others as a Guardian</div>
+        <div style="padding:4px 6px;border-radius:4px;background:var(--gu-bg);margin:3px 0;font-size:9px;color:var(--gu-text);border-left:2px solid var(--gu)">→ With Drivers: be direct, lead with data</div>
+        <div style="padding:4px 6px;border-radius:4px;background:var(--gu-bg);margin:3px 0;font-size:9px;color:var(--gu-text);border-left:2px solid var(--gu)">→ With Pioneers: embrace brainstorming</div>
+        <div style="padding:4px 6px;border-radius:4px;background:var(--gu-bg);margin:3px 0;font-size:9px;color:var(--gu-text);border-left:2px solid var(--gu)">→ With Integrators: build trust slowly</div>
+        <div class="placeholder w80"></div>
+        <div style="margin-top:6px;padding:4px 8px;border-radius:4px;background:var(--bg-tertiary);font-size:9px;font-weight:500;text-align:center;color:var(--text-secondary)">View team →</div>
+      </div>
+    </div>
+    <div class="screen" style="margin-top:6px">
+      <div class="cond-badge c-pi">Pioneer view</div>
+      <div class="screen-body">
+        <div class="screen-title">Your dashboard</div>
+        <div style="font-size:9px;color:var(--text-tertiary);margin-bottom:4px">How to work with others as a Pioneer</div>
+        <div style="padding:4px 6px;border-radius:4px;background:var(--pi-bg);margin:3px 0;font-size:9px;color:var(--pi-text);border-left:2px solid var(--pi)">→ With Drivers: bring supporting facts</div>
+        <div style="padding:4px 6px;border-radius:4px;background:var(--pi-bg);margin:3px 0;font-size:9px;color:var(--pi-text);border-left:2px solid var(--pi)">→ With Guardians: provide structure</div>
+        <div style="padding:4px 6px;border-radius:4px;background:var(--pi-bg);margin:3px 0;font-size:9px;color:var(--pi-text);border-left:2px solid var(--pi)">→ With Integrators: check in on feelings</div>
+        <div class="placeholder w80"></div>
+        <div style="margin-top:6px;padding:4px 8px;border-radius:4px;background:var(--bg-tertiary);font-size:9px;font-weight:500;text-align:center;color:var(--text-secondary)">View team →</div>
+      </div>
+    </div>
+    <div class="screen" style="margin-top:6px">
+      <div class="cond-badge c-in">Integrator view</div>
+      <div class="screen-body">
+        <div class="screen-title">Your dashboard</div>
+        <div style="font-size:9px;color:var(--text-tertiary);margin-bottom:4px">How to work with others as an Integrator</div>
+        <div style="padding:4px 6px;border-radius:4px;background:var(--in-bg);margin:3px 0;font-size:9px;color:var(--in-text);border-left:2px solid var(--in)">→ With Drivers: be concise, skip small talk</div>
+        <div style="padding:4px 6px;border-radius:4px;background:var(--in-bg);margin:3px 0;font-size:9px;color:var(--in-text);border-left:2px solid var(--in)">→ With Guardians: present clear options</div>
+        <div style="padding:4px 6px;border-radius:4px;background:var(--in-bg);margin:3px 0;font-size:9px;color:var(--in-text);border-left:2px solid var(--in)">→ With Pioneers: match their enthusiasm</div>
+        <div class="placeholder w80"></div>
+        <div style="margin-top:6px;padding:4px 8px;border-radius:4px;background:var(--bg-tertiary);font-size:9px;font-weight:500;text-align:center;color:var(--text-secondary)">View team →</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Converge -->
+<div class="converge">
+  <div class="drops-up"><div class="drop-up"></div><div class="drop-up"></div><div class="drop-up"></div><div class="drop-up"></div></div>
+  <div class="branch-bar"></div>
+  <div class="stem"></div>
+</div>
+<div class="converge-label">All 4 paths → same layout, personalized content</div>
+
+<!-- STEP 3 -->
+<div class="step">
+  <div class="step-label">Step 3 — Team chart</div>
+  <div class="grid-center">
+    <div class="screen" style="width:100%;max-width:440px">
+      <div class="screen-body">
+        <div class="screen-title">Your team (10 members)</div>
+        <div style="font-size:9px;color:var(--text-tertiary);margin-bottom:6px">Tap any person to see their profile + how to collaborate</div>
+        <div class="team-grid">
+          <div class="member-row" style="background:var(--dr-bg);border-color:var(--dr-border)"><div class="member-dot" style="background:var(--dr)"></div><span style="color:var(--dr-text);font-weight:500">Alex M.</span><span style="color:var(--dr-text);opacity:.6;font-size:8px;margin-left:auto">Driver</span></div>
+          <div class="member-row" style="background:var(--gu-bg);border-color:var(--gu-border)"><div class="member-dot" style="background:var(--gu)"></div><span style="color:var(--gu-text);font-weight:500">Sam K.</span><span style="color:var(--gu-text);opacity:.6;font-size:8px;margin-left:auto">Guardian</span></div>
+          <div class="member-row" style="background:var(--pi-bg);border-color:var(--pi-border)"><div class="member-dot" style="background:var(--pi)"></div><span style="color:var(--pi-text);font-weight:500">Jordan L.</span><span style="color:var(--pi-text);opacity:.6;font-size:8px;margin-left:auto">Pioneer</span></div>
+          <div class="member-row" style="background:var(--in-bg);border-color:var(--in-border)"><div class="member-dot" style="background:var(--in)"></div><span style="color:var(--in-text);font-weight:500">Taylor R.</span><span style="color:var(--in-text);opacity:.6;font-size:8px;margin-left:auto">Integrator</span></div>
+          <div class="member-row" style="background:var(--dr-bg);border-color:var(--dr-border)"><div class="member-dot" style="background:var(--dr)"></div><span style="color:var(--dr-text);font-weight:500">Morgan P.</span><span style="color:var(--dr-text);opacity:.6;font-size:8px;margin-left:auto">Driver</span></div>
+          <div class="member-row" style="background:var(--gu-bg);border-color:var(--gu-border)"><div class="member-dot" style="background:var(--gu)"></div><span style="color:var(--gu-text);font-weight:500">Casey W.</span><span style="color:var(--gu-text);opacity:.6;font-size:8px;margin-left:auto">Guardian</span></div>
+          <div class="member-row" style="background:var(--pi-bg);border-color:var(--pi-border)"><div class="member-dot" style="background:var(--pi)"></div><span style="color:var(--pi-text);font-weight:500">Riley N.</span><span style="color:var(--pi-text);opacity:.6;font-size:8px;margin-left:auto">Pioneer</span></div>
+          <div class="member-row" style="background:var(--in-bg);border-color:var(--in-border)"><div class="member-dot" style="background:var(--in)"></div><span style="color:var(--in-text);font-weight:500">Avery B.</span><span style="color:var(--in-text);opacity:.6;font-size:8px;margin-left:auto">Integrator</span></div>
+          <div class="member-row" style="background:var(--gu-bg);border-color:var(--gu-border)"><div class="member-dot" style="background:var(--gu)"></div><span style="color:var(--gu-text);font-weight:500">Drew H.</span><span style="color:var(--gu-text);opacity:.6;font-size:8px;margin-left:auto">Guardian</span></div>
+          <div class="member-row" style="background:var(--pi-bg);border-color:var(--pi-border)"><div class="member-dot" style="background:var(--pi)"></div><span style="color:var(--pi-text);font-weight:500">Quinn F.</span><span style="color:var(--pi-text);opacity:.6;font-size:8px;margin-left:auto">Pioneer</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fan-out -->
+<div class="fan-out">
+  <div class="stem"></div>
+  <div class="branch-bar"></div>
+  <div class="drops">
+    <div class="drop"><div class="line"></div></div>
+    <div class="drop"><div class="line"></div></div>
+    <div class="drop"><div class="line"></div></div>
+    <div class="drop"><div class="line"></div></div>
+  </div>
+</div>
+<div class="flow-label">Tap any member → personalized profile (YOUR archetype × THEIR archetype)</div>
+
+<!-- STEP 4 -->
+<div class="step" style="margin-top:8px">
+  <div class="step-label">Step 4 — Member profile</div>
+  <div class="grid-4">
+    <div class="screen" style="margin-top:6px">
+      <div class="cond-badge c-dr" style="font-size:7px">You: Driver</div>
+      <div class="screen-body">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--gu-border);display:flex;align-items:center;justify-content:center;font-size:10px;color:#0C447C;font-weight:500;flex-shrink:0">SK</div>
+          <div>
+            <div class="screen-title" style="margin:0">Sam K.</div>
+            <div style="font-size:8px" class="btn-pill c-gu">Guardian</div>
+          </div>
+        </div>
+        <div class="profile-section">
+          <div class="profile-section-title">Their strengths</div>
+          <div class="placeholder w100"></div><div class="placeholder w80"></div>
+        </div>
+        <div class="profile-section">
+          <div class="profile-section-title">How to collaborate</div>
+          <div class="interaction-tip" style="background:var(--dr-bg);border-color:var(--dr);color:var(--dr-text)">As a Driver, provide data upfront — Guardians need evidence before acting</div>
+          <div class="interaction-tip" style="background:var(--dr-bg);border-color:var(--dr);color:var(--dr-text)">Avoid rushing decisions — give them time to process</div>
+        </div>
+        <div class="profile-section">
+          <div class="profile-section-title">Potential friction</div>
+          <div class="placeholder w100"></div>
+        </div>
+      </div>
+    </div>
+    <div class="screen" style="margin-top:6px">
+      <div class="cond-badge c-gu" style="font-size:7px">You: Guardian</div>
+      <div class="screen-body">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--pi-border);display:flex;align-items:center;justify-content:center;font-size:10px;color:#633806;font-weight:500;flex-shrink:0">JL</div>
+          <div>
+            <div class="screen-title" style="margin:0">Jordan L.</div>
+            <div style="font-size:8px" class="btn-pill c-pi">Pioneer</div>
+          </div>
+        </div>
+        <div class="profile-section">
+          <div class="profile-section-title">Their strengths</div>
+          <div class="placeholder w100"></div><div class="placeholder w80"></div>
+        </div>
+        <div class="profile-section">
+          <div class="profile-section-title">How to collaborate</div>
+          <div class="interaction-tip" style="background:var(--gu-bg);border-color:var(--gu);color:var(--gu-text)">As a Guardian, stay open to unstructured brainstorming — it's how Pioneers think</div>
+          <div class="interaction-tip" style="background:var(--gu-bg);border-color:var(--gu);color:var(--gu-text)">Offer to handle the follow-through after ideation</div>
+        </div>
+        <div class="profile-section">
+          <div class="profile-section-title">Potential friction</div>
+          <div class="placeholder w100"></div>
+        </div>
+      </div>
+    </div>
+    <div class="screen" style="margin-top:6px">
+      <div class="cond-badge c-pi" style="font-size:7px">You: Pioneer</div>
+      <div class="screen-body">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--dr-border);display:flex;align-items:center;justify-content:center;font-size:10px;color:#4A1B0C;font-weight:500;flex-shrink:0">AM</div>
+          <div>
+            <div class="screen-title" style="margin:0">Alex M.</div>
+            <div style="font-size:8px" class="btn-pill c-dr">Driver</div>
+          </div>
+        </div>
+        <div class="profile-section">
+          <div class="profile-section-title">Their strengths</div>
+          <div class="placeholder w100"></div><div class="placeholder w80"></div>
+        </div>
+        <div class="profile-section">
+          <div class="profile-section-title">How to collaborate</div>
+          <div class="interaction-tip" style="background:var(--pi-bg);border-color:var(--pi);color:var(--pi-text)">As a Pioneer, lead with a clear bottom line — Drivers want the punchline first</div>
+          <div class="interaction-tip" style="background:var(--pi-bg);border-color:var(--pi);color:var(--pi-text)">Back your ideas with numbers to earn their buy-in</div>
+        </div>
+        <div class="profile-section">
+          <div class="profile-section-title">Potential friction</div>
+          <div class="placeholder w100"></div>
+        </div>
+      </div>
+    </div>
+    <div class="screen" style="margin-top:6px">
+      <div class="cond-badge c-in" style="font-size:7px">You: Integrator</div>
+      <div class="screen-body">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--in-border);display:flex;align-items:center;justify-content:center;font-size:10px;color:#04342C;font-weight:500;flex-shrink:0">TR</div>
+          <div>
+            <div class="screen-title" style="margin:0">Taylor R.</div>
+            <div style="font-size:8px" class="btn-pill c-in">Integrator</div>
+          </div>
+        </div>
+        <div class="profile-section">
+          <div class="profile-section-title">Their strengths</div>
+          <div class="placeholder w100"></div><div class="placeholder w80"></div>
+        </div>
+        <div class="profile-section">
+          <div class="profile-section-title">How to collaborate</div>
+          <div class="interaction-tip" style="background:var(--in-bg);border-color:var(--in);color:var(--in-text)">As a fellow Integrator, be careful not to over-accommodate — make sure decisions get made</div>
+          <div class="interaction-tip" style="background:var(--in-bg);border-color:var(--in);color:var(--in-text)">Leverage shared empathy to mediate team tensions</div>
+        </div>
+        <div class="profile-section">
+          <div class="profile-section-title">Potential friction</div>
+          <div class="placeholder w100"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ellipsis">···</div>
+<div class="ellipsis-note">× 10 team members each = up to 40 unique profile views</div>
+
+<!-- MATRIX LEGEND -->
+<div class="step" style="margin-top:12px">
+  <div class="screen matrix-screen">
+    <div class="screen-body" style="padding:12px 16px">
+      <div class="screen-title" style="text-align:center;margin-bottom:6px">Branching logic: 4 × 4 content matrix</div>
+      <div style="font-size:9px;color:var(--text-tertiary);text-align:center;margin-bottom:8px">Profile content is determined by the intersection of YOUR archetype and THEIR archetype</div>
+      <table>
+        <tr>
+          <td style="color:var(--text-tertiary)"></td>
+          <td style="font-weight:500;color:var(--dr-text)">Their: DR</td>
+          <td style="font-weight:500;color:var(--gu-text)">Their: GU</td>
+          <td style="font-weight:500;color:var(--pi-text)">Their: PI</td>
+          <td style="font-weight:500;color:var(--in-text)">Their: IN</td>
+        </tr>
+        <tr>
+          <td style="font-weight:500;color:var(--dr-text)">You: DR</td>
+          <td style="background:var(--dr-bg);border-radius:3px">DR↔DR</td>
+          <td style="background:var(--dr-bg);border-radius:3px">DR→GU</td>
+          <td style="background:var(--dr-bg);border-radius:3px">DR→PI</td>
+          <td style="background:var(--dr-bg);border-radius:3px">DR→IN</td>
+        </tr>
+        <tr>
+          <td style="font-weight:500;color:var(--gu-text)">You: GU</td>
+          <td style="background:var(--gu-bg);border-radius:3px">GU→DR</td>
+          <td style="background:var(--gu-bg);border-radius:3px">GU↔GU</td>
+          <td style="background:var(--gu-bg);border-radius:3px">GU→PI</td>
+          <td style="background:var(--gu-bg);border-radius:3px">GU→IN</td>
+        </tr>
+        <tr>
+          <td style="font-weight:500;color:var(--pi-text)">You: PI</td>
+          <td style="background:var(--pi-bg);border-radius:3px">PI→DR</td>
+          <td style="background:var(--pi-bg);border-radius:3px">PI→GU</td>
+          <td style="background:var(--pi-bg);border-radius:3px">PI↔PI</td>
+          <td style="background:var(--pi-bg);border-radius:3px">PI→IN</td>
+        </tr>
+        <tr>
+          <td style="font-weight:500;color:var(--in-text)">You: IN</td>
+          <td style="background:var(--in-bg);border-radius:3px">IN→DR</td>
+          <td style="background:var(--in-bg);border-radius:3px">IN→GU</td>
+          <td style="background:var(--in-bg);border-radius:3px">IN→PI</td>
+          <td style="background:var(--in-bg);border-radius:3px">IN↔IN</td>
+        </tr>
+      </table>
+      <div style="font-size:8px;color:var(--text-tertiary);text-align:center;margin-top:6px">= 16 unique content variations across 10 team member profiles</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
